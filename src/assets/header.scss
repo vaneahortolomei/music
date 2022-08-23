@@ -1,0 +1,17 @@
+.header {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__list {
+        list-style-type: none;
+        display: flex;
+        padding: 0;
+        margin: 0;
+    }
+    &__item {
+        + .header__item {
+            margin-left: 20px;
+        }
+    }
+}

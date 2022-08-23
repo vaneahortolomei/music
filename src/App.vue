@@ -1,14 +1,10 @@
 <template>
-    <div>{{msg}}</div>
+    <Header/>
 </template>
 <script>
+    import Header from "./components/Header.vue";
     export default {
-        setup() {
-            const msg = 'Hello my new music app!!!';
-            return {
-                msg
-            }
-        }
+        components: {Header},
     }
 </script>
 <style scoped>
