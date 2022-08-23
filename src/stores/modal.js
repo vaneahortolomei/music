@@ -4,4 +4,14 @@ export default defineStore('modal', {
     state: () => ({
         isOpen: false,
     }),
+    getters: {
+        hiddenClass(state) {
+            return state.isOpen ? 'modal-overlay--active' : '';
+        }
+    },
+    actions: {
+        toggleModal(state) {
+            state.isOpen = !state.isOpen;
+        }
+    }
 });
