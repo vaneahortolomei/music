@@ -1,6 +1,8 @@
 <template>
     <div class="header">
-        <div class="header__logo">Music</div>
+        <div class="header__logo">
+            <a href="/" title="logo" class="header__link">MusicLogo</a>
+        </div>
         <ul class="header__list">
             <li class="header__item">
                 <a href="#" class="header__link" @click.prevent="toggleModal">Login/Logout</a>
@@ -13,17 +15,17 @@
 </template>
 
 <script>
-    import {mapStores} from 'pinia';
+    import {mapWritableState} from 'pinia';
     import modalStore from '../stores/modal';
 
     export default {
         name: "Header",
         computed: {
-            ...mapStores(modalStore)
+            ...mapWritableState(modalStore, ['isOpen']),
         },
         methods: {
             toggleModal() {
-                this.modalStore.isOpen = !this.modalStore.isOpen;
+                this.isOpen = !this.isOpen;
             }
         }
     }
