@@ -1,9 +1,6 @@
 <template>
     <div class="wrapper">
         <Header/>
-        <div class="content">
-            <p>test</p>
-        </div>
     </div>
     <Auth/>
 </template>

@@ -1,0 +1,30 @@
+.form {
+    &__group {
+
+    }
+
+    &__label {
+
+    }
+
+    &__input {
+        width: 100%;
+        display: block;
+        z-index: 1;
+        font-size: 16px;
+        box-sizing: border-box;
+        box-shadow: none;
+        padding: 0 15px;
+        border-radius: 5px;
+        border: 1px solid #d6dbe5;
+        height: 45px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        overflow: visible;
+        line-height: inherit;
+    }
+    &__error {
+        color: red;
+    }
+}
