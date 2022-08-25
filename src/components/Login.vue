@@ -28,6 +28,9 @@
 </template>
 
 <script>
+    import {mapActions} from 'pinia';
+    import userModalStore from "../stores/user";
+
     export default {
         name: "Login",
         data() {
@@ -39,23 +42,39 @@
                 submission: false,
                 showAlert: false,
                 messageBg: 'message-box--process',
-                showMessage: ''
+                showMessage: '',
+                success: false,
             }
         },
         methods: {
-            submitLogin(val) {
-                console.log(val);
+            ...mapActions(userModalStore, {
+                signUser: 'login',
+            }),
+            async submitLogin(val) {
                 this.showAlert = true;
                 this.showMessage = 'Process!';
+                this.messageBg = 'message-box--process';
+                try {
+                    await this.signUser(val);
+                    this.success = true;
+                    if (this.success === true) {
+                        this.showMyMessage();
+                    }
+                } catch (e) {
+                    if (e) {
+                        this.showAlert = true;
+                        this.messageBg = 'message-box--error';
+                        this.showMessage = 'Something wrong! Try again please!';
+                    }
+                }
 
-                setTimeout(() => {
-                    this.messageBg = 'message-box--success';
-                    this.showMessage = 'Success!';
-                    this.showMyMessage();
-                }, 2000);
+
+                this.showAlert = true;
+                this.messageBg = 'message-box--success';
+                this.showMessage = 'Welcome to music store!';
             },
-            showMyMessage(){
-                setTimeout( () => {
+            showMyMessage() {
+                setTimeout(() => {
                     this.showAlert = false;
                     window.location.pathname = '/'
                 }, 2000)

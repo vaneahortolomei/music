@@ -66,6 +66,9 @@
 </template>
 
 <script>
+    import {mapActions} from 'pinia';
+    import userModalStore from "../stores/user";
+
     export default {
         name: "Register",
         data() {
@@ -87,12 +90,38 @@
                 submission: false,
                 showAlert: false,
                 messageBg: 'message-box--process',
-                showMessage: ''
+                showMessage: '',
+                success: false,
             }
         },
         methods: {
-            submitRegister(val){
-                console.log(val)
+            ...mapActions(userModalStore, {
+                createUser: 'register',
+            }),
+            async submitRegister(val) {
+                this.showAlert = true;
+                this.showMessage = 'Process!';
+                this.messageBg = 'message-box--process';
+                try {
+                    await this.createUser(val);
+                    this.success = true;
+
+                    if (this.success === true) {
+                        this.showAlert = false;
+                        setTimeout(() => {
+                            window.location.pathname = '/';
+                        }, 2000);
+                    }
+                } catch (error) {
+                    this.showAlert = true;
+                    this.messageBg = 'message-box--error';
+                    this.showMessage = 'Something wrong! Try again please!';
+                    return;
+                }
+
+                this.showAlert = true;
+                this.messageBg = 'message-box--success';
+                this.showMessage = 'Welcome to music store!';
             }
         }
     }
