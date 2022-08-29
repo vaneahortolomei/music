@@ -8,16 +8,17 @@ export default defineStore('user', {
     actions: {
         async register(payload) {
             await auth.createUserWithEmailAndPassword(
-                payload.email, payload.password
+                payload.email,
+                payload.password
             );
 
             await usersCollection.add({
                 name: payload.name,
-                lastName: payload.lastName,
                 email: payload.email,
                 age: payload.age,
                 country: payload.country,
             });
+
             this.isLogged = true;
         },
         async login(payload) {
@@ -26,7 +27,7 @@ export default defineStore('user', {
             );
             this.isLogged = true;
         },
-        async signOut(){
+        async signOut() {
             await auth.signOut();
 
             this.isLogged = false;

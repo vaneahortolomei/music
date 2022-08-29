@@ -1,6 +1,9 @@
 <template>
     <div class="wrapper">
         <Header/>
+        <div class="content">
+            <router-view/>
+        </div>
     </div>
     <Auth/>
 </template>
@@ -13,14 +16,14 @@
 
     export default {
         components: {Auth, Header},
-        computed: {
-            ...mapWritableState(userModalStore, ['isLogged']),
-
-        },
         created() {
             if (auth.currentUser) {
                 this.isLogged = true;
             }
+        },
+        computed: {
+            ...mapWritableState(userModalStore, ['isLogged']),
+
         },
     }
 </script>

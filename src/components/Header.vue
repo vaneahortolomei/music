@@ -1,7 +1,8 @@
 <template>
     <div class="header">
         <div class="header__logo">
-            <a href="/" title="logo" class="header__link">MusicLogo</a>
+            <router-link class="header__link" :to="{name: 'main'}" exact-active-class="no-active">MusicLogo
+            </router-link>
         </div>
         <ul class="header__list">
             <li v-if="!this.isLogged" class="header__item">
@@ -9,7 +10,7 @@
             </li>
             <template v-else>
                 <li class="header__item">
-                    <a href="#" class="header__link">Manage</a>
+                    <router-link class="header__link" :to="{name: 'manage'}">Manage</router-link>
                 </li>
                 <li class="header__item">
                     <a href="#" class="header__link" @click.prevent="logOut">Logout</a>
@@ -40,6 +41,7 @@
             },
             async logOut() {
                 await this.signOut();
+                this.$router.push({name: 'main'});
             }
         }
     }
