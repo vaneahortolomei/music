@@ -20,4 +20,9 @@
             margin-left: 20px;
         }
     }
+    &__link {
+        &--active {
+            color: #42ae42;
+        }
+    }
 }
