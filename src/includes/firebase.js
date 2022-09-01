@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app';
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import "firebase/compat/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyByk1W5Ousc4XWhYtHrnyDFMB2b9_3xzK0",
@@ -14,10 +15,14 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const db = firebase.firestore();
+const storage = firebase.storage();
 const usersCollection = db.collection('users');
+const songsCollection = db.collection('songs');
 
 export {
     auth,
     db,
-    usersCollection
+    storage,
+    usersCollection,
+    songsCollection
 }
