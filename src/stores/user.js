@@ -4,6 +4,7 @@ import {auth, usersCollection} from "../includes/firebase.js";
 export default defineStore('user', {
     state: () => ({
         isLogged: false,
+        user: auth.currentUser.displayName,
     }),
     actions: {
         async register(payload) {
