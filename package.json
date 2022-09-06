@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "firebase": "^9.9.3",
+    "howler": "^2.2.3",
     "pinia": "^2.0.17",
     "sass": "^1.54.5",
     "vee-validate": "^4.6.6",

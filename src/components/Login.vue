@@ -42,7 +42,7 @@
                 submission: false,
                 showAlert: false,
                 messageBg: 'message-box--process',
-                showMessage: '',
+                showMessage: 'Process!',
                 success: false,
             }
         },
