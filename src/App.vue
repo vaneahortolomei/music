@@ -3,6 +3,7 @@
         <Header/>
         <div class="content">
             <router-view/>
+            <Player/>
         </div>
     </div>
     <Auth/>
@@ -13,9 +14,10 @@
     import {mapWritableState} from 'pinia';
     import {auth} from "./includes/firebase"
     import userModalStore from "./stores/user";
+    import Player from "./components/Player.vue";
 
     export default {
-        components: {Auth, Header},
+        components: {Player, Auth, Header},
         created() {
             if (auth.currentUser) {
                 this.isLogged = true;

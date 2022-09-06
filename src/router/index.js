@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from "vue-router";
 import Manage from "../views/Manage.vue";
 import Main from "../views/Main.vue";
 import notFoundPage from '../views/404.vue';
+import Song from "../views/Song.vue";
 
 const routes = [
     {
@@ -14,13 +15,17 @@ const routes = [
         name: "manage",
         component: Manage,
         beforeEnter: (to, from, next) => {
-            console.log('her on manage page')
             next();
         },
     },
     {
-        name: 'notFoundPage',
+        path: '/song/:id',
+        name: 'song',
+        component: Song
+    },
+    {
         path: '/:CatchAll(.*)*',
+        name: 'notFoundPage',
         component: notFoundPage
     },
 ];
@@ -32,7 +37,6 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log('global guard');
     next();
 });
 
