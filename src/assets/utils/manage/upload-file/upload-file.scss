@@ -1,0 +1,30 @@
+.upload-file {
+    background-color: var(--content-color);
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    @media(min-width: 1024px){
+        padding: 20px;
+        margin-top: 10px;
+    }
+
+    &__custom {
+        position: relative;
+        cursor: pointer;
+        flex: 0 auto;
+
+        .upload-file__input {
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            width: 100%;
+        }
+    }
+    &__file-name {
+        font-size: 12px;
+    }
+}

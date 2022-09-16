@@ -9,11 +9,11 @@ export default defineStore('user', {
         async register(payload) {
             await auth.createUserWithEmailAndPassword(
                 payload.email,
-                payload.password
+                payload.password,
             );
 
             await usersCollection.add({
-                name: payload.name,
+                firstName: payload.firstName,
                 email: payload.email,
                 age: payload.age,
                 country: payload.country,

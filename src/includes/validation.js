@@ -41,11 +41,11 @@ export default {
         configure({
             generateMessage: (ctx) => {
                 const messages = {
-                    required: `Поле ${ctx.field} обязательно для заполнения!`,
-                    min: `Слишком мало символов`,
-                    max: `Слишком много символов`,
-                    email: `Поле ${ctx.field} должно быть валидным!`,
-                    excluded: `Эта страна в жопе!`,
+                    required: `${ctx.field} is required!`,
+                    min: `Too few characters`,
+                    max: `Too many characters`,
+                    email: `The ${ctx.field} field must be valid!`,
+                    excluded: `Country banned`,
                 };
 
                 return messages[ctx.rule.name] ?

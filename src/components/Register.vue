@@ -1,22 +1,22 @@
 <template>
     <transition name="fade">
-        <div class="message-box"
-             :class="messageBg"
-             v-if="showAlert"
-        >
-            {{showMessage}}
-        </div>
+        <Notification class="notification"
+                      :class="messageBg"
+                      v-if="showAlert">
+            <template #notification>
+                {{showMessage}}
+            </template>
+        </Notification>
     </transition>
     <fieldset id="modal-register">
-        <legend>Register</legend>
         <Form @submit="submitRegister"
               class="form"
               :validation-schema="registerSchema"
               :initial-values="userData">
             <div class="form__group">
                 <label>Name</label>
-                <Field name="name" class="form__input" type="text"/>
-                <ErrorMessage class="form__error" name="name"/>
+                <Field name="firstName" class="form__input" type="text"/>
+                <ErrorMessage class="form__error" name="firstName"/>
             </div>
             <div class="form__group">
                 <label>LastName</label>
@@ -56,7 +56,7 @@
             <div class="form__group">
                 <Field type="checkbox" name="tos" value="1"/>
                 <label> Accept terms</label>
-                <ErrorMessage class="form__error" name="tos"/>
+                <ErrorMessage class="form__error form__checkbox-error" name="tos"/>
             </div>
             <button class="button button--main button--responsive" type="submit" :disabled="submission">
                 Register
@@ -68,14 +68,16 @@
 <script>
     import {mapActions} from 'pinia';
     import userModalStore from "../stores/user";
+    import Notification from "./Notification.vue";
 
     export default {
         name: "Register",
+        components: {Notification},
         data() {
             return {
                 tab: 'login',
                 registerSchema: {
-                    name: 'required|min:2|max:100|alpha_spaces',
+                    firstName: 'required|min:2|max:100|alpha_spaces',
                     lastName: 'required|min:3|max:100|alpha_spaces',
                     age: 'required|min_value:18|max_value:100',
                     email: 'required|min:3|max:100|email',
@@ -89,7 +91,7 @@
                 },
                 submission: false,
                 showAlert: false,
-                messageBg: 'message-box--process',
+                messageBg: 'notification--process',
                 showMessage: '',
                 success: false,
             }
@@ -101,8 +103,9 @@
             async submitRegister(val) {
                 this.showAlert = true;
                 this.showMessage = 'Process!';
-                this.messageBg = 'message-box--process';
+                this.messageBg = 'notification--process';
                 try {
+                    console.log(val)
                     await this.createUser(val);
                     this.success = true;
 
@@ -114,13 +117,13 @@
                     }
                 } catch (error) {
                     this.showAlert = true;
-                    this.messageBg = 'message-box--error';
+                    this.messageBg = 'notification--error';
                     this.showMessage = 'Something wrong! Try again please!';
                     return;
                 }
 
                 this.showAlert = true;
-                this.messageBg = 'message-box--success';
+                this.messageBg = 'notification--success';
                 this.showMessage = 'Welcome to music store!';
             }
         }

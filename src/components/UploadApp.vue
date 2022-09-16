@@ -1,29 +1,31 @@
 <template>
-    <div class="manage__container">
-        <header class="manage__container-title">
-            <strong>Upload</strong>
-        </header>
-        <div class="manage-container__box">
-            <div class="manage-container__upload upload-box"
-                 @drag.prevent.stop=""
-                 @dragstart.prevent.stop=""
-                 @dragend.prevent.stop="is_dragover = false"
-                 @dragenter.prevent.stop="is_dragover = true"
-                 @dragover.prevent.stop="is_dragover = true"
-                 @dragleave.prevent.stop="is_dragover = false"
-                 @drop.prevent.stop="uploadFiles($event)"
-                 :class="{'upload-active': is_dragover}">
-                <p class="upload-box__title">text</p>
+    <div class="manage__upload">
+        <div class="upload-box upload-box--manage"
+             @drag.prevent.stop=""
+             @dragstart.prevent.stop=""
+             @dragend.prevent.stop="is_dragover = false"
+             @dragenter.prevent.stop="is_dragover = true"
+             @dragover.prevent.stop="is_dragover = true"
+             @dragleave.prevent.stop="is_dragover = false"
+             @drop.prevent.stop="uploadFiles($event)"
+             :class="{'upload-box--active': is_dragover}">
+            <p class="upload-box__title">BrowseFiles</p>
+        </div>
+        <div class="upload-file">
+            <div class="upload-file__custom">
+                <input ref="file" id="files" type="file" class="upload-file__input" @change="uploadFiles($event)"
+                       multiple/>
+                <button class="button button--main button--responsive">BrowseFiles</button>
+                <span class="upload-file__file-name" ref="fileName"/>
             </div>
-            <div class="progress-bar" v-for="upload in uploads" :key="upload.name">
-                <p class="progress-bar__title">{{upload.name}}</p>
-                <span class="progress-bar__line">
+        </div>
+        <div class="manage__progress progress-bar" v-for="upload in uploads" :key="upload.name">
+            <p class="progress-bar__title">{{upload.name}}</p>
+            <span class="progress-bar__line">
                                 <span class="progress-bar__inside"
                                       :style="{backgroundColor: upload.variant, width: upload.current_progress + '%'}"/>
                             <span class="progress-bar__percentage">{{upload.text}}</span>
                             </span>
-            </div>
-            <input type="file" @change="uploadFiles($event)" multiple style="margin-top: 20px"/>
         </div>
     </div>
 </template>
@@ -47,8 +49,8 @@
         },
         methods: {
             uploadFiles($event) {
+                // this.$refs['fileName'].textContent = $event.target.value.split(/(\\|\/)/g).pop();
                 this.is_dragover = false;
-
                 const files = $event.dataTransfer ?
                     [...$event.dataTransfer.files] :
                     [...$event.target.files];
@@ -66,7 +68,7 @@
                         task,
                         current_progress: 0,
                         name: file.name,
-                        variant: '#1e90ff',
+                        variant: '#ff8227',
                         text: 'Loading...',
                     }) - 1;
 
@@ -90,8 +92,6 @@
                         const songGet = await songsRef.get();
 
                         this.addSong(songGet);
-
-                        console.log(this.user);
 
                         this.uploads[uploadIndex].variant = 'rgba(46, 255, 172, 0.7)';
                         this.uploads[uploadIndex].text = 'Complete';

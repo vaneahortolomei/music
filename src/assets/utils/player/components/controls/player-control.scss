@@ -1,0 +1,34 @@
+.player-control {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 60px;
+    width: auto;
+    padding: 0;
+    background: var(--play-btn-color);
+    min-width: 60px;
+    border: none;
+    cursor: pointer;
+    &__icon {
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%);
+        width: 10px;
+        height: 10px;
+
+        &--play {
+            background: url("/src/img/play.svg") no-repeat center;
+            background-size: 10px 10px;
+            transform: translate(40%, -40%) rotate(210deg);
+            fill: white;
+        }
+
+        &--paused {
+            background: url("/src/img/pause.svg") no-repeat center;
+            background-size: 10px 10px;
+        }
+    }
+}

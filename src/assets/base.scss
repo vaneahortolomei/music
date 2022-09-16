@@ -1,7 +1,16 @@
 :root {
-    --vt-c-white: #ffffff;
+    --vt-c-white: #fff;
     --vt-c-black: #181818;
-    --header-background: #fc942c;
+    --header-background: #fff;
+    --header-size: 70px;
+    --header-active-size: 200px;
+    --main-color: #fc942c;
+    --font-weight: 300;
+    --content-color: #f4fafe;
+    --red-color: #e61715;
+    --gray-color: #a8afb7;
+    --gray-ligth-color: #c1c5cc;
+    --play-btn-color: #17191a;
 }
 
 *,
@@ -24,6 +33,15 @@ body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: var(--vt-c-black);
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6, span, p, div {
+    font-weight: var(--font-weight);
 }
 
 img {

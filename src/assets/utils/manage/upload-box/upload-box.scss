@@ -1,0 +1,17 @@
+.upload-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--content-color);
+    min-height: 200px;
+    border-radius: 15px;
+    border: 1px dashed var(--gray-color);
+    transition: background-color 0.2s ease;
+    &--active {
+        background-color: #d8dee1;
+    }
+    &__title {
+        font-size: 12px;
+        color: var(--gray-color);
+    }
+}

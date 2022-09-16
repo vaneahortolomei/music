@@ -1,0 +1,45 @@
+.progress-bar {
+    &:not(:last-child) {
+        margin-bottom: 15px;
+    }
+
+    &__line {
+        display: flex;
+        background-color: gray;
+        height: 10px;
+        margin: 0;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    & + .progress-bar__line {
+        margin-top: 20px;
+    }
+
+    &__inside {
+        display: flex;
+        height: 100%;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        transition: width 0.2s ease;
+    }
+
+    &__title {
+        margin-bottom: 2px;
+        text-align: left;
+        display: inherit;
+        font-size: 12px;
+    }
+
+    &__percentage {
+        position: absolute;
+        left: 50%;
+        font-size: 11px;
+        top: 5px;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        text-align: left;
+        display: inherit;
+    }
+}
