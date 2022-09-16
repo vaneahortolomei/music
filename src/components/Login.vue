@@ -78,7 +78,7 @@
             showMyMessage() {
                 setTimeout(() => {
                     this.showAlert = false;
-                    window.location.pathname = '/manage'
+                    window.location.pathname = '/'
                 }, 2000)
             }
         }
