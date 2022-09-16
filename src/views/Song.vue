@@ -1,43 +1,57 @@
 <template>
-    <div class="music-page">
-        <div class="music-page__header">
-            <div class="container">
-                <div class="music-page__wrap">
-                    <div>
-                        <button type="button" class="music-page__button play-button button" @click.prevent="newSong(song)"/>
-                    </div>
-                    <div>
-                        <h1>{{song.modified_name}}</h1>
-                        <p>{{song.genre}}</p>
-                    </div>
+    <div class="song-page">
+        <ContentHeader class="song-page__header">
+            <template #content-header>
+                <div class="song-page__control">
+                    <button type="button" class="music-page__button player-control player-control--header"
+                            @click.prevent="newSong(song)">
+                        <span class="player-control__icon"
+                              :class="{'player-control__icon--play' : !playing,
+                              'player-control__icon--paused' : playing }"
+                        />
+                    </button>
                 </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="music-page__main">
-                <p>comments: {{song.comment_count}}</p>
-                <Form @submit="submitMessage" :validation-schema="messageSchema" class="form" v-if="this.isLogged">
-                    <label>Message</label>
-                    <Field as="textarea" name="message" class="form__input"
-                           placeholder="Enter a message" rows="15"/>
-                    <div class="music-page__footer">
-                        <ErrorMessage ref="error" class="error-active" name="message"/>
-                        <button class="button button--main">SubmitMessage</button>
-                    </div>
-                </Form>
-                <ul class="comment-list">
-                    <li class="status" v-if="showAlert"
-                        :class="messageBg">
+                <div class="song-page__desc">
+                    <h1>{{song.modified_name}}</h1>
+                    <p>{{song.genre}}</p>
+                </div>
+            </template>
+        </ContentHeader>
+        <div class="content-body comment">
+            <ul class="comment__list">
+                <Notification
+                    v-if="showAlert"
+                    :class="messageBg">
+                    <template #notification>
                         {{showMessage}}
-                    </li>
-                    <li class="comment-item" v-for="comment in comments" :key="comment.docID">
-                        <strong class="comment-item__name">{{comment.user}}</strong>
-                        <time datetime="" class="comment-item__time">
+                    </template>
+                </Notification>
+                <li class="comment__item" v-for="comment in comments" :key="comment.docID">
+                    <figure class="comment__avatar">
+<!--                        <img src="#" alt="avatar" class="comment__img"/>-->
+                    </figure>
+                    <div class="comment__wrap">
+                        <strong class="comment__name">User</strong>
+                        <time datetime="" class="comment__time">
                             <b>{{comment.date}}</b>
                         </time>
-                        <p class="comment-item__message">{{comment.content.message}}</p>
-                    </li>
-                </ul>
+                    </div>
+                    <p class="comment__message">{{comment.content.message}}</p>
+                </li>
+            </ul>
+<!--            <p class="comment__count">comments: {{song.comment_count}}</p>-->
+            <div class="comment__form" v-if="this.isLogged">
+                <figure class="comment__avatar comment__avatar--form">
+<!--                    <img src="#" alt="avatar" class="comment__img"/>-->
+                </figure>
+                <Form @submit="submitMessage" :validation-schema="messageSchema" class="form">
+                    <Field as="textarea" name="message" id="text" class="form__input"
+                           placeholder="Reply" rows="15"/>
+                    <div class="comment__form-footer">
+                        <ErrorMessage ref="error" class="form__error error-active" name="message"/>
+                        <button class="button button--main">Submit</button>
+                    </div>
+                </Form>
             </div>
         </div>
     </div>
@@ -46,21 +60,25 @@
 <script>
     import useUserStore from "../stores/user";
     import usePlayerStore from "../stores/player"
-    import {mapActions, mapWritableState} from "pinia";
-    import {auth, songsCollection, commentsCollection} from "../includes/firebase.js";
+    import {mapActions, mapWritableState, mapState} from "pinia";
+    import {auth, songsCollection, commentsCollection, usersCollection} from "../includes/firebase.js";
+    import ContentHeader from "../components/ContentHeader.vue";
+    import Notification from "../components/Notification.vue";
 
     export default {
         name: "Song",
+        components: {Notification, ContentHeader},
         data() {
             return {
                 song: '',
                 showAlert: false,
-                messageBg: 'message-box--process',
+                messageBg: 'notification--process',
                 showMessage: 'Process!',
                 messageSchema: {
                     message: 'required|min:3|max:200'
                 },
                 comments: [],
+                commentDate: new Date(),
             }
         },
         async created() {
@@ -77,18 +95,22 @@
         },
         computed: {
             ...mapWritableState(useUserStore, ['isLogged']),
+            ...mapState(usePlayerStore, {
+                playing: 'playing',
+            })
         },
         methods: {
             ...mapActions(usePlayerStore, ['newSong']),
             async submitMessage(val) {
                 this.showAlert = true;
                 this.showMessage = 'Process!';
-                this.messageBg = 'message-box--process';
+                this.messageBg = 'notification--process';
 
                 try {
+                    console.log(auth.currentUser);
                     const comment = {
                         user: auth.currentUser.displayName,
-                        date: new Date().toString(),
+                        date: this.formatData(this.commentDate).toString(),
                         content: val,
                         uid: auth.currentUser.uid,
                         sid: this.$route.params.id
@@ -106,13 +128,13 @@
                 } catch (e) {
                     if (e) {
                         this.showAlert = true;
-                        this.messageBg = 'message-box--error';
+                        this.messageBg = 'notification--error';
                         this.showMessage = 'Something wrong! Try again please!';
                     }
                 }
 
                 this.showAlert = true;
-                this.messageBg = 'message-box--success';
+                this.messageBg = 'notification--success';
                 this.showMessage = 'Comment added';
 
                 this.hideAlert();
@@ -132,94 +154,20 @@
                 setTimeout(() => {
                     this.showAlert = false;
                 }, 2000);
-            }
+            },
+            formatData(dataObject) {
+                const parts = {
+                    date: dataObject.getDate(),
+                    month: dataObject.getMonth() + 1,
+                    year: dataObject.getFullYear(),
+                    hour: (dataObject.getHours() % 12) || 12,
+                    minutes: dataObject.getMinutes(),
+                    seconds: dataObject.getSeconds(),
+                    amOrPm: dataObject.getHours() < 12 ? 'AM' : 'PM',
+                };
+
+                return `${parts.date}/${parts.month}/${parts.year} ${parts.hour}/${parts.minutes}/${parts.seconds}: ${parts.amOrPm}`
+            },
         }
     }
 </script>
-
-<style scoped>
-    .comment-list {
-        list-style-type: none;
-        margin: 20px 0;
-        padding: 0;
-    }
-
-    .comment-item + .comment-item {
-        margin-top: 20px;
-    }
-
-    .comment-item {
-        border: 1px dashed #dbe1e9;
-        border-radius: 20px;
-        padding: 15px;
-        text-align: left;
-    }
-
-    .comment-item__name {
-        display: block;
-    }
-
-    .comment-item__message {
-        margin-top: 20px;
-    }
-
-    .music-page__main {
-        background-color: #fff;
-        box-shadow: 0 15px 30px rgb(31 51 136 / 15%);
-        border: 1px solid #dbe1e9;
-        border-radius: 15px;
-        padding: 20px;
-        margin-top: 50px;
-    }
-
-    .music-page__header {
-        background-color: #f5b5bf;
-        padding: 30px 0;
-    }
-
-    .music-page__header h1, p {
-        margin: 0
-    }
-
-    .music-page__wrap {
-        text-align: left;
-        display: flex;
-        align-items: center;
-    }
-
-    .music-page__button {
-        margin-right: 10px;
-        position: relative;
-    }
-
-    .music-page__button:before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: 50%;
-        transform: translate(50%, -50%);
-        width: 20px;
-        height: 20px;
-        background-color: black;
-    }
-
-    .music-page__footer .error-active {
-        display: block;
-        margin: 10px 0;
-    }
-
-    .status {
-        padding: 20px;
-        text-align: center;
-        font-weight: bold;
-        color: #fff;
-        margin-bottom: 15px;
-    }
-
-    .play-button {
-        border-radius: 50%;
-        height: 100px;
-        width: 100px;
-        background: #fff;
-    }
-</style>

@@ -4,15 +4,15 @@
             <div role="tab" class="tab tab--auth">
                 <button type="button" class="tab__button button"
                         :class="{
-                              'button--main':tab === 'login',
-                              'button--default':tab === 'register'
+                              'button--white':tab === 'login',
+                              '':tab === 'register'
                         }"
                         @click.prevent="tab = 'login'">Login
                 </button>
                 <button type="button" class="tab__button button"
                         :class="{
-                              'button--main':tab === 'register',
-                              'button--default':tab === 'login'
+                              'button--white':tab === 'register',
+                              '':tab === 'login'
                         }"
                         @click.prevent="tab = 'register'">
                     Register

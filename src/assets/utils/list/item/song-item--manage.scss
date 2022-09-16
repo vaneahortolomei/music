@@ -1,0 +1,42 @@
+.song-item.song-item--manage {
+    background-color: var(--vt-c-white);
+    box-shadow: 0 15px 30px rgb(31 51 136 / 15%);
+    border-radius: 15px;
+    display: block;
+    cursor: initial;
+
+    &:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    .song-item__button {
+        background-size: 20px 20px;
+        fill: white;
+        min-width: 30px;
+    }
+    .song-item__desc {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .song-item__form-edit {
+        border: none;
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    .song-item__button--remove {
+        background: url("/src/img/remove.svg") no-repeat center;
+    }
+
+    .song-item__button--edit {
+        background: url("/src/img/edit.svg") no-repeat center;
+    }
+
+    .song-item__btn-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+}

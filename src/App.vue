@@ -2,7 +2,10 @@
     <div class="wrapper">
         <Header/>
         <div class="content">
-            <router-view/>
+            <div class="main-grid">
+                <Gradient/>
+                <router-view/>
+            </div>
             <Player/>
         </div>
     </div>
@@ -15,9 +18,10 @@
     import {auth} from "./includes/firebase"
     import userModalStore from "./stores/user";
     import Player from "./components/Player.vue";
+    import Gradient from "./components/Gradient.vue";
 
     export default {
-        components: {Player, Auth, Header},
+        components: {Gradient, Player, Auth, Header},
         created() {
             if (auth.currentUser) {
                 this.isLogged = true;
@@ -29,6 +33,3 @@
         },
     }
 </script>
-<style scoped>
-
-</style>

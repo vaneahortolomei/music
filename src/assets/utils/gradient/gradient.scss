@@ -1,0 +1,8 @@
+.gradient {
+    @media(min-width: 1024px){
+        min-height: 100vh;
+        margin-left: var(--header-size);
+        background: rgb(244,223,173);
+        background: linear-gradient(180deg, rgba(244,223,173,1) 0%, rgba(243,230,214,1) 38%, rgba(192,191,221,1) 100%, rgba(255,255,255,1) 100%);
+    }
+}

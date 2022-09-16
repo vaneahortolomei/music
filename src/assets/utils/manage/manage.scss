@@ -1,0 +1,42 @@
+.manage {
+    margin-bottom: 80px;
+    @media(min-width: 1024px) {
+        margin-bottom: 0;
+    }
+
+    &__header {
+        border-radius: 15px;
+        text-align: center;
+        min-height: 250px;
+    }
+
+    &__title {
+        font-size: 25px;
+        @media(min-width: 768px) {
+            font-size: 50px;
+        }
+    }
+
+    &__upload {
+        padding: 20px;
+        border-radius: 10px;
+        background: var(--vt-c-white);
+        margin: -130px auto;
+        max-width: 250px;
+        box-shadow: 0 15px 30px rgb(31 51 136 / 15%);
+        @media(min-width: 475px) {
+            max-width: 400px;
+        }
+        @media(min-width: 768px) {
+            max-width: 500px;
+        }
+    }
+
+    &__progress {
+        margin-top: 20px;
+    }
+
+    &__main {
+        margin-top: 200px;
+    }
+}

@@ -1,0 +1,26 @@
+.progress {
+    display: flex;
+    background-color: var(--gray-ligth-color);
+    height: 5px;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    transition: width 0.2s ease;
+    //&__round {
+    //    width: 15px;
+    //    height: 15px;
+    //    background: var(--main-color);
+    //    border-radius: 50%;
+    //    position: absolute;
+    //    top: -4px;
+    //    left: 0;
+    //    bottom: 0;
+    //    cursor: pointer;
+    //}
+}
+
+progress::-webkit-progress-value {
+    background: rgb(252,118,89);
+    background: linear-gradient(90deg, rgba(252,118,89,1) 0%, rgba(254,71,75,1) 98%);
+}

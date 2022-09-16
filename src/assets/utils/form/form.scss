@@ -1,10 +1,12 @@
 .form {
     &__group {
-
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
     }
 
     &__label {
-
+        font-size: 14px;
     }
 
     &__input {
@@ -24,7 +26,9 @@
         overflow: visible;
         line-height: inherit;
     }
+
     &__error {
         color: red;
+        font-size: 12px;
     }
 }

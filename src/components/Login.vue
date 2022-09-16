@@ -1,14 +1,14 @@
 <template>
     <fieldset id="modal-login">
         <transition name="fade">
-            <div class="message-box"
-                 :class="messageBg"
-                 v-if="showAlert"
-            >
-                {{showMessage}}
-            </div>
+            <Notification class="notification"
+                          :class="messageBg"
+                          v-if="showAlert">
+                <template #notification>
+                    {{showMessage}}
+                </template>
+            </Notification>
         </transition>
-        <legend>Login</legend>
         <Form @submit="submitLogin"
               class="form"
               :validation-schema="loginSchema">
@@ -30,9 +30,11 @@
 <script>
     import {mapActions} from 'pinia';
     import userModalStore from "../stores/user";
+    import Notification from "./Notification.vue";
 
     export default {
         name: "Login",
+        components: {Notification},
         data() {
             return {
                 loginSchema: {
@@ -41,7 +43,7 @@
                 },
                 submission: false,
                 showAlert: false,
-                messageBg: 'message-box--process',
+                messageBg: 'notification--process',
                 showMessage: 'Process!',
                 success: false,
             }
@@ -53,7 +55,7 @@
             async submitLogin(val) {
                 this.showAlert = true;
                 this.showMessage = 'Process!';
-                this.messageBg = 'message-box--process';
+                this.messageBg = 'notification--process';
                 try {
                     await this.signUser(val);
                     this.success = true;
@@ -63,15 +65,15 @@
                 } catch (e) {
                     if (e) {
                         this.showAlert = true;
-                        this.messageBg = 'message-box--error';
+                        this.messageBg = 'notification--error';
                         this.showMessage = 'Something wrong! Try again please!';
                     }
                 }
 
 
                 this.showAlert = true;
-                this.messageBg = 'message-box--success';
-                this.showMessage = 'Welcome to music store!';
+                this.messageBg = 'notification--success';
+                this.showMessage = 'Welcome!';
             },
             showMyMessage() {
                 setTimeout(() => {

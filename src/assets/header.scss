@@ -1,28 +1,115 @@
 @import "./base";
 
 .header {
-    padding: 0 20px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     background: var(--header-background);
-    height: 65px;
+    transition: width 0.3s;
+    overflow: hidden;
+    scrollbar-width: none;
+    @media(min-width: 1024px) {
+        position: fixed;
+        left: 0;
+        height: 100%;
+        width: var(--header-size);
+        z-index: 100;
+        flex-direction: column;
+    }
+
+    &__nav {
+        width: 100%;
+    }
 
     &__list {
         list-style-type: none;
         display: flex;
-        padding: 0;
+        justify-content: flex-end;
+        padding: 20px;
         margin: 0;
+        @media(min-width: 1024px) {
+            display: grid;
+            row-gap: 1.5rem;
+            justify-content: flex-start;
+        }
     }
 
     &__item {
-        + .header__item {
-            margin-left: 20px;
+        display: grid;
+        row-gap: 2.5rem;
+
+        &:hover {
+            .header__link {
+                color: var(--main-color);
+            }
+
+            .header__icon {
+                fill: var(--main-color);
+            }
+        }
+
+        @media(max-width: 1024px){
+            & + .header__item {
+                margin-left: 15px;
+            }
         }
     }
+
+    &__logo {
+        width: 100%;
+        display: none;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 20px;
+        @media(min-width: 1024px){
+            display: flex;
+        }
+    }
+
     &__link {
-        &--active {
-            color: #42ae42;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: 0.2s;
+
+        @media(min-width: 1024px) {
+            &--active {
+                color: var(--main-color);
+
+                .header__icon {
+                    fill: var(--main-color);
+                }
+            }
+        }
+    }
+
+    &__icon {
+        transition: 0.2s;
+
+        &:hover {
+            fill: var(--main-color);
+        }
+    }
+
+    &__title {
+        opacity: 0;
+        transition: opacity 0.3s;
+        white-space: nowrap;
+        margin-top: 5px;
+        display: none;
+        @media(min-width: 1024px) {
+            display: block;
+        }
+    }
+
+    @media(min-width: 1024px) {
+        &--show {
+            width: var(--header-active-size);
+
+            .header__title {
+                opacity: 1;
+                transition: opacity 0.3s;
+            }
         }
     }
 }

@@ -1,0 +1,13 @@
+.song-item {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    &:hover {
+        background-color: var(--content-color);
+        cursor: pointer;
+    }
+    &__genre {
+        font-size: 12px;
+        color: var(--gray-color);
+    }
+}

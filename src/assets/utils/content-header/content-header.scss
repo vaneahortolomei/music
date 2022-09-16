@@ -1,0 +1,18 @@
+.content-header {
+    background-color: var(--content-color);
+    padding: 20px;
+
+    &__head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__icon {
+        fill: var(--red-color);
+    }
+
+    &__title {
+        font-size: 20px;
+    }
+}
