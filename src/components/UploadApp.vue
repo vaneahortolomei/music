@@ -56,9 +56,9 @@
                     [...$event.target.files];
 
                 files.forEach(file => {
-                    if (file.type !== 'audio/mpeg') {
-                        return null;
-                    }
+                    // if (file.type !== 'audio/.*') {
+                    //     return null;
+                    // }
 
                     const storageRef = storage.ref();
                     const songsRef = storageRef.child(`songs/${file.name}`);
