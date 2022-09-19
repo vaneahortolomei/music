@@ -1,11 +1,19 @@
 <template>
     <div class="content-body manage">
+        <Notification v-if="notification"
+            class="notification notification--format">
+            <template #notification>
+                <p>Only audio files</p>
+            </template>
+        </Notification>
         <ContentHeader class="manage__header">
             <template #content-header>
                 <h1 class="manage__title">Drag & Drop files here to upload</h1>
             </template>
         </ContentHeader>
-        <UploadApp ref="upload" :addSong="addSong"/>
+        <UploadApp ref="upload"
+                   :addSong="addSong"
+                   @showNotification="showNotification"/>
         <div class="manage__main">
             <Loader v-if="loading"/>
             <ul class="songs-list">
@@ -24,20 +32,23 @@
 <script>
     import useUserStore from "../stores/user";
     import UploadApp from "../components/UploadApp.vue";
-    import {storage, auth, songsCollection} from "../includes/firebase.js";
+    import {auth, songsCollection} from "../includes/firebase.js";
     import Item from "../components/Item.vue";
     import ContentHeader from "../components/ContentHeader.vue";
     import Loader from "../components/Loader.vue";
+    import Notification from "../components/Notification.vue";
 
     export default {
         name: "Manage",
-        components: {Loader, ContentHeader, Item, UploadApp},
+        components: {Notification, Loader, ContentHeader, Item, UploadApp},
         data() {
             return {
                 loading: true,
                 showForm: true,
                 songs: [],
                 leaveFlag: false,
+                notification: false,
+                user: '',
             }
         },
         async created() {
@@ -79,6 +90,12 @@
                     docID: document.id,
                 };
                 this.songs.push(this.song);
+            },
+            showNotification(){
+                this.notification = true;
+                setTimeout(() => {
+                    this.notification = false;
+                }, 3000);
             }
         }
     }

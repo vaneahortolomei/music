@@ -7,18 +7,21 @@ export default defineStore('user', {
     }),
     actions: {
         async register(payload) {
-            await auth.createUserWithEmailAndPassword(
+            const userCred = await auth.createUserWithEmailAndPassword(
                 payload.email,
                 payload.password,
             );
 
-            await usersCollection.add({
+            await usersCollection.doc(userCred.user.uid).set({
                 firstName: payload.firstName,
                 email: payload.email,
                 age: payload.age,
                 country: payload.country,
             });
 
+            await userCred.user.updateProfile({
+                displayName: payload.firstName,
+            });
             this.isLogged = true;
         },
         async login(payload) {

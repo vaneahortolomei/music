@@ -21,6 +21,7 @@
                     </a>
                 </li>
                 <template v-else>
+                    <li>{{userName}}</li>
                     <li class="header__item">
                         <router-link class="header__link" :to="{name: 'main'}">
                             <svg width="25" height="25" class="header__icon">
@@ -55,6 +56,7 @@
     import {mapActions, mapWritableState} from 'pinia';
     import useModalStore from '../stores/modal';
     import useUserStore from "../stores/user";
+    import {auth} from "../includes/firebase.js";
 
     export default {
         data() {
@@ -66,6 +68,9 @@
         computed: {
             ...mapWritableState(useModalStore, ['isOpen']),
             ...mapWritableState(useUserStore, ['isLogged']),
+            userName(){
+                return this.user = auth.currentUser.displayName;
+            }
 
         },
         methods: {

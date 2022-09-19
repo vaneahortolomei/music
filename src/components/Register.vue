@@ -105,7 +105,6 @@
                 this.showMessage = 'Process!';
                 this.messageBg = 'notification--process';
                 try {
-                    console.log(val)
                     await this.createUser(val);
                     this.success = true;
 

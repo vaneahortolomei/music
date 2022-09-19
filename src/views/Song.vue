@@ -31,7 +31,7 @@
 <!--                        <img src="#" alt="avatar" class="comment__img"/>-->
                     </figure>
                     <div class="comment__wrap">
-                        <strong class="comment__name">User</strong>
+                        <strong class="comment__name">{{comment.user}}</strong>
                         <time datetime="" class="comment__time">
                             <b>{{comment.date}}</b>
                         </time>
