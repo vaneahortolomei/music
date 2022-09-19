@@ -1,5 +1,6 @@
 <template>
     <div class="manage__upload">
+        <p></p>
         <div class="upload-box upload-box--manage"
              @drag.prevent.stop=""
              @dragstart.prevent.stop=""
@@ -31,7 +32,7 @@
 </template>
 
 <script>
-    import {storage, auth, songsCollection} from "../includes/firebase.js";
+    import {storage, auth, songsCollection, usersCollection} from "../includes/firebase.js";
     import useUserStore from "../stores/user";
     import {mapWritableState} from "pinia";
 
@@ -56,9 +57,15 @@
                     [...$event.target.files];
 
                 files.forEach(file => {
-                    // if (file.type !== 'audio/.*') {
-                    //     return null;
-                    // }
+                    if (file.type !== 'audio/x-m4a' &&
+                        file.type !== 'audio/mpeg' &&
+                        file.type !== 'audio/mp3' &&
+                        file.type !== 'audio/flac' &&
+                        file.type !== 'audio/wav'){
+                        console.log(auth.currentUser.email)
+                        this.$emit('showNotification', Boolean);
+                        return null;
+                    }
 
                     const storageRef = storage.ref();
                     const songsRef = storageRef.child(`songs/${file.name}`);
