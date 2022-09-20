@@ -1,0 +1,44 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: var(--header-background);
+    transition: width 0.3s;
+    overflow: hidden;
+    scrollbar-width: none;
+    @media(min-width: 1024px) {
+        position: fixed;
+        left: 0;
+        height: 100%;
+        width: var(--header-size);
+        z-index: 100;
+        flex-direction: column;
+    }
+
+    &__nav {
+        width: 100%;
+    }
+
+    &__logo {
+        width: 100%;
+        display: none;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 20px;
+        @media(min-width: 1024px){
+            display: flex;
+        }
+    }
+
+
+    @media(min-width: 1024px) {
+        &--show {
+            width: var(--header-active-size);
+
+            .nav__title {
+                opacity: 1;
+                transition: opacity 0.3s;
+            }
+        }
+    }
+}

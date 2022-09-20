@@ -5,7 +5,7 @@
                 <p class="song-item__name">{{song.modified_name}}</p>
                 <p class="song-item__genre">{{song.genre}}</p>
             </div>
-            <div class="song-item__btn-group">
+            <div class="song-item__btn">
                 <button class="button
                 button--main
                 song-item__button

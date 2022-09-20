@@ -1,6 +1,5 @@
 <template>
     <div class="manage__upload">
-        <p></p>
         <div class="upload-box upload-box--manage"
              @drag.prevent.stop=""
              @dragstart.prevent.stop=""

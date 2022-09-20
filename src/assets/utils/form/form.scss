@@ -25,6 +25,9 @@
         appearance: none;
         overflow: visible;
         line-height: inherit;
+        &--country {
+            border: 1px solid #b8adad!important;
+        }
     }
 
     &__error {

@@ -1,30 +1,9 @@
-@import "./base";
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    background: var(--header-background);
-    transition: width 0.3s;
-    overflow: hidden;
-    scrollbar-width: none;
-    @media(min-width: 1024px) {
-        position: fixed;
-        left: 0;
-        height: 100%;
-        width: var(--header-size);
-        z-index: 100;
-        flex-direction: column;
-    }
-
-    &__nav {
-        width: 100%;
-    }
-
+.nav {
     &__list {
         list-style-type: none;
         display: flex;
         justify-content: flex-end;
+        align-items: center;
         padding: 20px;
         margin: 0;
         @media(min-width: 1024px) {
@@ -33,39 +12,32 @@
             justify-content: flex-start;
         }
     }
-
     &__item {
         display: grid;
         row-gap: 2.5rem;
 
         &:hover {
-            .header__link {
+            .nav__link {
                 color: var(--main-color);
             }
 
-            .header__icon {
+            .nav__icon {
                 fill: var(--main-color);
             }
         }
 
-        @media(max-width: 1024px){
-            & + .header__item {
+        @media(max-width: 1025px){
+            & + .nav__item {
                 margin-left: 15px;
             }
         }
     }
-
-    &__logo {
-        width: 100%;
-        display: none;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 20px;
+    &__show {
+        display: block;
         @media(min-width: 1024px){
-            display: flex;
+            display: none;
         }
     }
-
     &__link {
         display: flex;
         align-items: center;
@@ -76,13 +48,12 @@
             &--active {
                 color: var(--main-color);
 
-                .header__icon {
+                .nav__icon {
                     fill: var(--main-color);
                 }
             }
         }
     }
-
     &__icon {
         transition: 0.2s;
 
@@ -99,17 +70,6 @@
         display: none;
         @media(min-width: 1024px) {
             display: block;
-        }
-    }
-
-    @media(min-width: 1024px) {
-        &--show {
-            width: var(--header-active-size);
-
-            .header__title {
-                opacity: 1;
-                transition: opacity 0.3s;
-            }
         }
     }
 }

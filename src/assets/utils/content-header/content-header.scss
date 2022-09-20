@@ -5,11 +5,11 @@
     &__head {
         display: flex;
         align-items: center;
-        gap: 10px;
     }
 
     &__icon {
         fill: var(--red-color);
+        margin-right: 10px;
     }
 
     &__title {

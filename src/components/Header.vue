@@ -1,88 +1,78 @@
 <template>
-    <header class="header" :class="{'header--show': active}">
-        <div class="header__logo">
-            <button type="button" class="button button--toggle" @click.prevent="this.active = !this.active">
-                <svg width="25" height="25" class="header__icon">
-                    <use xlink:href="/src/img/sprite.svg#menu"/>
-                </svg>
-            </button>
-        </div>
-        <nav class="header__nav">
-            <ul class="header__list">
-                <li v-if="!this.isLogged" class="header__item">
-                    <a href="#" class="header__link" @click.prevent="toggleModal" title="Login/Register">
-                        <svg width="25" height="25" class="header__icon">
+    <header class="header header--user content-header">
+        <div class="header__wrap">
+            <button type="button"
+                    class="button header__button"
+                    @click.prevent="backToPrevious"/>
+            <ul v-if="!this.isLogged" class="nav">
+                <li class="nav__item">
+                    <a href="#" class="nav__link" @click.prevent="toggleModal" title="Login/Register">
+                        <svg width="25" height="25" class="nav__icon">
                             <use xlink:href="/src/img/sprite.svg#login"/>
                         </svg>
-                        <span class="header__title">
+                        <span class="nav__title">
                             Login/Register
                         </span>
-
                     </a>
                 </li>
-                <template v-else>
-                    <li>{{userName}}</li>
-                    <li class="header__item">
-                        <router-link class="header__link" :to="{name: 'main'}">
-                            <svg width="25" height="25" class="header__icon">
-                                <use xlink:href="/src/img/sprite.svg#home"/>
-                            </svg>
-                            <span class="header__title">Home</span>
-                        </router-link>
-                    </li>
-                    <li class="header__item">
-                        <router-link class="header__link" :to="{name: 'manage'}">
-                            <svg width="25" height="25" class="header__icon">
-                                <use xlink:href="/src/img/sprite.svg#manage"/>
-                            </svg>
-                            <span class="header__title">Manage</span>
-                        </router-link>
-                    </li>
-                    <li class="header__item">
-                        <a href="#" class="header__link" @click.prevent="logOut" title="Logout">
-                            <svg width="25" height="25" class="header__icon">
-                                <use xlink:href="/src/img/sprite.svg#login"/>
-                            </svg>
-                            <span class="header__title">Logout</span>
-                        </a>
-                    </li>
-                </template>
             </ul>
-        </nav>
+            <div v-else class="clickable header__user-menu user-menu" :class="hiddenClass" @click.prevent="toggleMenu">
+                <UserAvatar class="user-avatar--header"/>
+                <button type="button" class="clickable__button"/>
+                <div v-if="isActive" class="user-menu__dropdown">
+                    <nav class="user-menu__nav nav">
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="#" class="nav__link" @click.prevent="logOut" title="Logout">
+                                    <svg width="25" height="25" class="nav__icon">
+                                        <use xlink:href="/src/img/sprite.svg#login"/>
+                                    </svg>
+                                    <span class="nav__title">Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </header>
 </template>
 
 <script>
-    import {mapActions, mapWritableState} from 'pinia';
-    import useModalStore from '../stores/modal';
+    import {mapWritableState, mapState, mapActions} from 'pinia';
+    import UserAvatar from "./UserAvatar.vue";
+    import useMenuStore from '../stores/user-menu.js';
     import useUserStore from "../stores/user";
-    import {auth} from "../includes/firebase.js";
+    import useModalStore from '../stores/modal';
 
     export default {
-        data() {
-            return {
-                active: false,
-            }
-        },
         name: "Header",
+        components: {UserAvatar},
+        data() {
+            return {}
+        },
         computed: {
-            ...mapWritableState(useModalStore, ['isOpen']),
+            ...mapState(useMenuStore, ['hiddenClass']),
+            ...mapWritableState(useMenuStore, ['isActive']),
             ...mapWritableState(useUserStore, ['isLogged']),
-            userName(){
-                return this.user = auth.currentUser.displayName;
-            }
-
+            ...mapWritableState(useModalStore, ['isOpen']),
         },
         methods: {
             ...mapActions(useUserStore, {
                 signOut: 'signOut'
             }),
-            toggleModal() {
-                this.isOpen = !this.isOpen;
-            },
             async logOut() {
                 await this.signOut();
                 this.$router.push({name: 'main'});
+            },
+            backToPrevious() {
+                return this.$router.go(-1);
+            },
+            toggleModal() {
+                this.isOpen = !this.isOpen;
+            },
+            toggleMenu() {
+                this.isActive = !this.isActive;
             }
         }
     }
