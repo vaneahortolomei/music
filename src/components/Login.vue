@@ -31,6 +31,7 @@
     import {mapActions} from 'pinia';
     import userModalStore from "../stores/user";
     import Notification from "./Notification.vue";
+    import {auth} from "../includes/firebase.js";
 
     export default {
         name: "Login",
@@ -59,6 +60,9 @@
                 try {
                     await this.signUser(val);
                     this.success = true;
+                    this.showAlert = true;
+                    this.messageBg = 'notification--success';
+                    this.showMessage = `Welcome, ${auth.currentUser.displayName}`;
                     if (this.success === true) {
                         this.showMyMessage();
                     }
@@ -66,14 +70,10 @@
                     if (e) {
                         this.showAlert = true;
                         this.messageBg = 'notification--error';
-                        this.showMessage = 'Something wrong! Try again please!';
+                        this.showMessage = 'Something wrong or user not found!';
+                        this.showMyMessage();
                     }
                 }
-
-
-                this.showAlert = true;
-                this.messageBg = 'notification--success';
-                this.showMessage = 'Welcome!';
             },
             showMyMessage() {
                 setTimeout(() => {

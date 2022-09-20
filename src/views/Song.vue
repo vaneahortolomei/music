@@ -18,8 +18,10 @@
             </template>
         </ContentHeader>
         <div class="content-body comment">
-            <ul class="comment__list">
+            <Loader v-if="loading"/>
+            <ul v-if="comments.length > 0" class="comment__list">
                 <Notification
+                    class="notification notification--comment"
                     v-if="showAlert"
                     :class="messageBg">
                     <template #notification>
@@ -27,9 +29,9 @@
                     </template>
                 </Notification>
                 <li class="comment__item" v-for="comment in comments" :key="comment.docID">
-                    <figure class="comment__avatar">
-<!--                        <img src="#" alt="avatar" class="comment__img"/>-->
-                    </figure>
+                    <div class="user-avatar user-avatar--hide-name comment__avatar">
+                        <div class="user-avatar__avatar">{{comment.user.charAt(0)}}</div>
+                    </div>
                     <div class="comment__wrap">
                         <strong class="comment__name">{{comment.user}}</strong>
                         <time datetime="" class="comment__time">
@@ -39,19 +41,20 @@
                     <p class="comment__message">{{comment.content.message}}</p>
                 </li>
             </ul>
-<!--            <p class="comment__count">comments: {{song.comment_count}}</p>-->
+            <!--            <p class="comment__count">comments: {{song.comment_count}}</p>-->
             <div class="comment__form" v-if="this.isLogged">
-                <figure class="comment__avatar comment__avatar--form">
-<!--                    <img src="#" alt="avatar" class="comment__img"/>-->
-                </figure>
+                <UserAvatar class="user-avatar--hide-name comment__avatar comment__avatar--form"/>
                 <Form @submit="submitMessage" :validation-schema="messageSchema" class="form">
                     <Field as="textarea" name="message" id="text" class="form__input"
-                           placeholder="Reply" rows="15"/>
+                           placeholder="Reply" rows="5" v-model="textField"/>
                     <div class="comment__form-footer">
                         <ErrorMessage ref="error" class="form__error error-active" name="message"/>
                         <button class="button button--main">Submit</button>
                     </div>
                 </Form>
+            </div>
+            <div v-else class="comment__login">
+                <button type="button" class="button button--main" @click.prevent="toggleModal">Login</button>
             </div>
         </div>
     </div>
@@ -64,18 +67,23 @@
     import {auth, songsCollection, commentsCollection, usersCollection} from "../includes/firebase.js";
     import ContentHeader from "../components/ContentHeader.vue";
     import Notification from "../components/Notification.vue";
+    import UserAvatar from "../components/UserAvatar.vue";
+    import Loader from "../components/Loader.vue";
+    import useModalStore from '../stores/modal';
 
     export default {
         name: "Song",
-        components: {Notification, ContentHeader},
+        components: {Loader, UserAvatar, Notification, ContentHeader},
         data() {
             return {
+                textField: '',
                 song: '',
+                loading: true,
                 showAlert: false,
                 messageBg: 'notification--process',
                 showMessage: 'Process!',
                 messageSchema: {
-                    message: 'required|min:3|max:200'
+                    message: 'required|min:3|max:300'
                 },
                 comments: [],
                 commentDate: new Date(),
@@ -91,23 +99,26 @@
             }
 
             this.song = snapshot.data();
+            this.loading = false;
             this.getComments();
         },
         computed: {
             ...mapWritableState(useUserStore, ['isLogged']),
+            ...mapWritableState(useModalStore, ['isOpen']),
             ...mapState(usePlayerStore, {
                 playing: 'playing',
-            })
+            }),
         },
         methods: {
             ...mapActions(usePlayerStore, ['newSong']),
+            toggleModal() {
+                this.isOpen = !this.isOpen;
+            },
             async submitMessage(val) {
                 this.showAlert = true;
                 this.showMessage = 'Process!';
                 this.messageBg = 'notification--process';
-
                 try {
-                    console.log(auth.currentUser);
                     const comment = {
                         user: auth.currentUser.displayName,
                         date: this.formatData(this.commentDate).toString(),
@@ -136,7 +147,7 @@
                 this.showAlert = true;
                 this.messageBg = 'notification--success';
                 this.showMessage = 'Comment added';
-
+                this.textField = '';
                 this.hideAlert();
             },
             async getComments() {
@@ -166,7 +177,10 @@
                     amOrPm: dataObject.getHours() < 12 ? 'AM' : 'PM',
                 };
 
-                return `${parts.date}/${parts.month}/${parts.year} ${parts.hour}/${parts.minutes}/${parts.seconds}: ${parts.amOrPm}`
+                const date = parts.date < 10 ? `0${parts.date}` : parts.date;
+                const month = parts.month < 10 ? `0${parts.month}` : parts.month;
+
+                return `${date}.${month}.${parts.year}`
             },
         }
     }

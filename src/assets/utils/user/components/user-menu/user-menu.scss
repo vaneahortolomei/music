@@ -1,0 +1,39 @@
+.user-menu {
+    padding: 5px;
+    background: var(--vt-c-white);
+    min-width: 200px;
+    border-radius: 30px;
+
+    &:after {
+        content: '';
+        background: url('/src/img/down-arrow.svg') no-repeat;
+        background-size: cover;
+        display: block;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        top: 40%;
+        right: 10px;
+        transition: transform 0.2s;
+        transform: rotate(-180deg);
+    }
+
+    &--active {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        &:after {
+            transform: rotate(0deg);
+        }
+    }
+    &__dropdown {
+        position: absolute;
+        background: var(--vt-c-white);
+        width: 100%;
+        left: 0;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        .nav__title {
+            opacity: 1;
+        }
+    }
+}

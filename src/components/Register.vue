@@ -40,7 +40,7 @@
             </div>
             <div class="form__group">
                 <label>Country</label>
-                <Field as="select" name="country" class="form__input">
+                <Field as="select" name="country" class="form__input form__input--country">
                     <option value="USA">USA</option>
                     <option value="Germany">Germany</option>
                     <option value="France">France</option>
