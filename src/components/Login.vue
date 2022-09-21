@@ -40,7 +40,7 @@
             return {
                 loginSchema: {
                     email: 'required|email',
-                    password: 'required|min:3|max:32|numeric',
+                    password: 'required|min:3|max:32',
                 },
                 submission: false,
                 showAlert: false,
