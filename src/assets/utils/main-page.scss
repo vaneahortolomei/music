@@ -1,0 +1,8 @@
+.main-page {
+    &__body {
+        margin-bottom: var(--player-mobile-height);
+        @media(min-width: 1024px){
+            margin-bottom: var(--player-desktop-height);
+        }
+    }
+}
