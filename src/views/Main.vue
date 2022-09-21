@@ -1,6 +1,6 @@
 <template>
     <div class="main-page">
-        <ContentHeader class="main-page__content">
+        <ContentHeader class="main-page__header">
             <template #content-header>
                 <div class="content-header__head">
                     <svg width="25" height="25" class="content-header__icon">
@@ -10,7 +10,7 @@
                 </div>
             </template>
         </ContentHeader>
-        <div class="content-body">
+        <div class="content-body main-page__body">
             <Loader v-if="loading"/>
             <div class="">
                 <ul class="songs-list">
