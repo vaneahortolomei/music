@@ -1,0 +1,27 @@
+.not-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: var(--player-mobile-height);
+    @media(min-width: 1024px){
+        margin-bottom: var(--player-desktop-height);
+    }
+    &__title {
+        text-align: center;
+        font-size: 100px;
+        line-height: 1.1;
+        color: #d1cee0;
+        @media(min-width: 768px){
+            font-size: 200px;
+        }
+    }
+    &__subtitle {
+        text-align: center;
+        font-weight: 500;
+        color: #d1cee0;
+        @media(min-width: 768px) {
+            font-size: 20px;
+        }
+    }
+}
