@@ -1,7 +1,7 @@
 .manage {
-    margin-bottom: 80px;
+    margin-bottom: var(--player-mobile-height);
     @media(min-width: 1024px) {
-        margin-bottom: 0;
+        margin-bottom: var(--player-desktop-height);
     }
 
     &__header {

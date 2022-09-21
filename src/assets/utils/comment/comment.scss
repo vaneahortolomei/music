@@ -1,13 +1,14 @@
 .comment {
-    margin-bottom: 80px;
+    margin-bottom: var(--player-mobile-height);
     @media(min-width: 1024px) {
-        margin-bottom: 150px;
+        margin-bottom: var(--player-desktop-height);
     }
 
     &__list {
         padding: 0;
         list-style-type: none;
     }
+
     &__message {
         font-size: 14px;
     }
@@ -15,6 +16,7 @@
     &__item {
         position: relative;
         padding-left: 60px;
+
         &:before {
             content: '';
             position: absolute;
@@ -23,9 +25,11 @@
             height: 100%;
             border-left: 1px solid var(--gray-color);
         }
+
         &:not(:last-child) {
             margin-bottom: 20px;
         }
+
         &:last-child::before {
             border-left: none;
         }
@@ -85,6 +89,7 @@
             max-width: 700px;
             margin: 20px auto;
         }
+
         .user-avatar__avatar {
             background: #e2ebf1;
         }
@@ -102,6 +107,7 @@
             font-size: 12px;
         }
     }
+
     &__login {
         text-align: center;
         background: var(--content-color);
