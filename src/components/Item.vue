@@ -109,7 +109,7 @@
 
                 this.showAlert = true;
                 this.messageBg = 'notification--success';
-                this.showMessage = 'Success!';
+                this.showMessage = 'Song was updated!';
 
 
                 this.hideStatus();

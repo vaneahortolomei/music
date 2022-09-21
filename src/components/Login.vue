@@ -60,26 +60,37 @@
                 try {
                     await this.signUser(val);
                     this.success = true;
-                    this.showAlert = true;
-                    this.messageBg = 'notification--success';
-                    this.showMessage = `Welcome, ${auth.currentUser.displayName}`;
                     if (this.success === true) {
-                        this.showMyMessage();
+                        setTimeout(() => {
+                            window.location.pathname = '/';
+                        }, 1500)
                     }
                 } catch (e) {
                     if (e) {
                         this.showAlert = true;
                         this.messageBg = 'notification--error';
-                        this.showMessage = 'Something wrong or user not found!';
-                        this.showMyMessage();
+                        if (e.code === 'auth/wrong-password') {
+                            this.showMessage = 'Wrong password!';
+                        }
+                        if (e.code === 'auth/user-not-found') {
+                            this.showMessage = 'User not found!';
+                        }
+                        if (e.code === 'auth/too-many-requests') {
+                            this.showMessage = 'To many requests. Try later.';
+                        }
+                        this.setAlertTimer(3000);
+                        return;
                     }
                 }
+
+                this.showAlert = true;
+                this.messageBg = 'notification--success';
+                this.showMessage = `Welcome, ${auth.currentUser.displayName}`;
             },
-            showMyMessage() {
+            setAlertTimer(time) {
                 setTimeout(() => {
                     this.showAlert = false;
-                    window.location.pathname = '/'
-                }, 2000)
+                }, time);
             }
         }
     }

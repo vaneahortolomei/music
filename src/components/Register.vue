@@ -81,7 +81,7 @@
                     lastName: 'required|min:3|max:100|alpha_spaces',
                     age: 'required|min_value:18|max_value:100',
                     email: 'required|min:3|max:100|email',
-                    password: 'required|min:6|max:100|numeric',
+                    password: 'required|min:6|max:100',
                     confirm_password: 'confirmed:@password',
                     country: 'required|excluded:Russia',
                     tos: 'required'
@@ -114,17 +114,27 @@
                             window.location.pathname = '/';
                         }, 2000);
                     }
-                } catch (error) {
+                } catch (e) {
                     this.showAlert = true;
                     this.messageBg = 'notification--error';
-                    this.showMessage = 'Something wrong! Try again please!';
+
+                    e.code === 'auth/email-already-in-use' ?
+                        this.showMessage = 'This email is already in use' :
+                        this.showMessage = 'Something wrong! Try again please!';
+                    this.setAlertTimer(3000);
+
                     return;
                 }
 
                 this.showAlert = true;
                 this.messageBg = 'notification--success';
-                this.showMessage = 'Welcome to music store!';
+                this.showMessage = 'Welcome to MyMusic!';
+            },
+            setAlertTimer(time) {
+                setTimeout(() => {
+                    this.showAlert = false;
+                }, time);
             }
-        }
+        },
     }
 </script>
