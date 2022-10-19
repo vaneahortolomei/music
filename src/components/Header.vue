@@ -15,6 +15,14 @@
                         </span>
                     </a>
                 </li>
+                <li class="nav__item">
+                    <router-link class="nav__link" :to="{name: 'main'}">
+                        <svg width="25" height="25" class="nav__icon">
+                            <use xlink:href="/src/img/sprite.svg#home"/>
+                        </svg>
+                        <span class="nav__title">Home</span>
+                    </router-link>
+                </li>
             </ul>
             <div v-else class="clickable header__user-menu user-menu" :class="hiddenClass" @click.prevent="toggleMenu">
                 <UserAvatar class="user-avatar--header"/>
@@ -29,6 +37,22 @@
                                     </svg>
                                     <span class="nav__title">Logout</span>
                                 </a>
+                            </li>
+                            <li class="nav__item">
+                                <router-link class="nav__link" :to="{name: 'main'}">
+                                    <svg width="25" height="25" class="nav__icon">
+                                        <use xlink:href="/src/img/sprite.svg#home"/>
+                                    </svg>
+                                    <span class="nav__title">Home</span>
+                                </router-link>
+                            </li>
+                            <li class="nav__item">
+                                <router-link class="nav__link" :to="{name: 'manage'}">
+                                    <svg width="25" height="25" class="nav__icon">
+                                        <use xlink:href="/src/img/sprite.svg#manage"/>
+                                    </svg>
+                                    <span class="nav__title">Manage</span>
+                                </router-link>
                             </li>
                         </ul>
                     </nav>

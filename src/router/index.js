@@ -3,12 +3,18 @@ import Manage from "../views/Manage.vue";
 import Main from "../views/Main.vue";
 import notFoundPage from '../views/404.vue';
 import Song from "../views/Song.vue";
+import Auth from "../views/Auth.vue";
 
 const routes = [
     {
         path: "/",
         name: "main",
         component: Main,
+    },
+    {
+        path: "/auth",
+        name: "auth",
+        component: Auth,
     },
     {
         path: "/manage",
