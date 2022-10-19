@@ -1,18 +1,20 @@
 <template>
-    <transition name="fade">
-        <div class="modal-overlay" :class="hiddenClass">
-            <div class="modal-dialog">
-                <div class="modal-window">
-                    <div class="modal-window__content">
-                        <button type="button" class="modal-window__close-btn"
-                                @click.prevent="visibility = false">X
-                        </button>
-                        <slot name="modal-content"/>
+    <teleport to="body">
+        <transition name="fade">
+            <div class="modal-overlay" :class="hiddenClass">
+                <div class="modal-dialog">
+                    <div class="modal-window">
+                        <div class="modal-window__content">
+                            <button type="button" class="modal-window__close-btn"
+                                    @click.prevent="visibility = false">X
+                            </button>
+                            <slot name="modal-content"/>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </transition>
+        </transition>
+    </teleport>
 </template>
 
 <script>
