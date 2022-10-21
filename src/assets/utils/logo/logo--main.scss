@@ -1,0 +1,14 @@
+.logo.logo--main {
+    display: flex;
+    justify-content: center;
+    .logo__link {
+        display: inline-block;
+        background: url('/src/img/logo/Logo-inline.svg') no-repeat center;
+        background-size: 100px 100px;
+        width: 100px;
+        height: 50px;
+        &:hover {
+            color: var(--main-hover-color);
+        }
+    }
+}

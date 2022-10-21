@@ -1,30 +1,32 @@
 <template>
     <div class="content-body manage">
-        <Notification v-if="notification"
-            class="notification notification--format">
-            <template #notification>
-                <p>Only audio files</p>
-            </template>
-        </Notification>
-        <ContentHeader class="manage__header">
-            <template #content-header>
-                <h1 class="manage__title">Drag & Drop files here to upload</h1>
-            </template>
-        </ContentHeader>
-        <UploadApp ref="upload"
-                   :addSong="addSong"
-                   @showNotification="showNotification"/>
-        <div class="manage__main">
-            <Loader v-if="loading"/>
-            <ul class="songs-list">
-                <Item v-for="(song, i) in songs"
-                      :key="song.docID"
-                      :song="song"
-                      :updateTheSong="updateTheSong"
-                      :removeSong="removeSong"
-                      :unsavedFlag="unsavedFlag"
-                      :index="i"/>
-            </ul>
+        <div class="container">
+            <Notification v-if="notification"
+                          class="notification notification--format">
+                <template #notification>
+                    <p>Only audio files</p>
+                </template>
+            </Notification>
+            <ContentHeader class="manage__header">
+                <template #content-header>
+                    <h1 class="manage__title">Drag & Drop files here to upload</h1>
+                </template>
+            </ContentHeader>
+            <UploadApp ref="upload"
+                       :addSong="addSong"
+                       @showNotification="showNotification"/>
+            <div class="manage__main">
+                <Loader v-if="loading"/>
+                <ul class="songs-list">
+                    <Item v-for="(song, i) in songs"
+                          :key="song.docID"
+                          :song="song"
+                          :updateTheSong="updateTheSong"
+                          :removeSong="removeSong"
+                          :unsavedFlag="unsavedFlag"
+                          :index="i"/>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -91,7 +93,7 @@
                 };
                 this.songs.push(this.song);
             },
-            showNotification(){
+            showNotification() {
                 this.notification = true;
                 setTimeout(() => {
                     this.notification = false;

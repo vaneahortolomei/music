@@ -4,17 +4,15 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        padding: 20px;
         margin: 0;
-        @media(min-width: 1024px) {
-            display: grid;
-            row-gap: 1.5rem;
-            justify-content: flex-start;
-        }
     }
     &__item {
         display: grid;
         row-gap: 2.5rem;
+
+        + .nav__item {
+            margin-left: 15px;
+        }
 
         &:hover {
             .nav__link {
@@ -41,8 +39,11 @@
     &__link {
         display: flex;
         align-items: center;
-        gap: 10px;
         transition: 0.2s;
+
+        + .nav__link {
+            margin-left: 15px;
+        }
 
         @media(min-width: 1024px) {
             &--active {

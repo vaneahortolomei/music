@@ -1,18 +1,8 @@
 <template>
-    <div class="main-page">
-        <ContentHeader class="main-page__header">
-            <template #content-header>
-                <div class="content-header__head">
-                    <svg width="25" height="25" class="content-header__icon">
-                        <use xlink:href="/src/img/sprite.svg#music"/>
-                    </svg>
-                    <h2 class="content-header__title">SongsList</h2>
-                </div>
-            </template>
-        </ContentHeader>
-        <div class="content-body main-page__body">
-            <Loader v-if="loading"/>
-            <div class="">
+    <main class="main-page">
+        <div class="container">
+            <div class="main-page__body">
+                <!--            <Loader v-if="loading"/>-->
                 <ul class="songs-list">
                     <Item v-for="song in songs"
                           :key="song.docID"
@@ -21,7 +11,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>

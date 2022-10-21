@@ -1,7 +1,7 @@
 <template>
-    <li class="song-item">
+    <li class="song-item clickable">
         <div class="song-item__head">
-            <router-link class="song-item__link" :to="{name: 'song', params: {id: song.docID}}">
+            <router-link class="song-item__link clickable__button" :to="{name: 'song', params: {id: song.docID}}">
                 <strong>{{song.modified_name}}</strong>
             </router-link>
             <p class="song-item__genre">{{song.genre}}</p>

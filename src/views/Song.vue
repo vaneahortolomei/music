@@ -1,60 +1,62 @@
 <template>
     <div class="song-page">
-        <ContentHeader class="song-page__header">
-            <template #content-header>
-                <div class="song-page__control">
-                    <button type="button" class="music-page__button player-control player-control--header"
-                            @click.prevent="newSong(song)">
+        <div class="container">
+            <ContentHeader class="song-page__header">
+                <template #content-header>
+                    <div class="song-page__control">
+                        <button type="button" class="music-page__button player-control player-control--header"
+                                @click.prevent="newSong(song)">
                         <span class="player-control__icon"
                               :class="{'player-control__icon--play' : !playing,
                               'player-control__icon--paused' : playing }"
                         />
-                    </button>
+                        </button>
+                    </div>
+                    <div class="song-page__desc">
+                        <h1>{{song.modified_name}}</h1>
+                        <p>{{song.genre}}</p>
+                    </div>
+                </template>
+            </ContentHeader>
+            <div class="content-body comment">
+                <Loader v-if="loading"/>
+                <ul v-if="comments.length > 0" class="comment__list">
+                    <Notification
+                        class="notification notification--comment"
+                        v-if="showAlert"
+                        :class="messageBg">
+                        <template #notification>
+                            {{showMessage}}
+                        </template>
+                    </Notification>
+                    <li class="comment__item" v-for="comment in comments" :key="comment.docID">
+                        <div class="user-avatar user-avatar--hide-name comment__avatar">
+                            <div class="user-avatar__avatar">{{comment.user.charAt(0)}}</div>
+                        </div>
+                        <div class="comment__wrap">
+                            <strong class="comment__name">{{comment.user}}</strong>
+                            <time datetime="" class="comment__time">
+                                <b>{{comment.date}}</b>
+                            </time>
+                        </div>
+                        <p class="comment__message">{{comment.content.message}}</p>
+                    </li>
+                </ul>
+                <!--            <p class="comment__count">comments: {{song.comment_count}}</p>-->
+                <div class="comment__form" v-if="this.isLogged">
+                    <UserAvatar class="user-avatar--hide-name comment__avatar comment__avatar--form"/>
+                    <Form @submit="submitMessage" :validation-schema="messageSchema" class="form">
+                        <Field as="textarea" name="message" id="text" class="form__input"
+                               placeholder="Reply" rows="5" v-model="textField"/>
+                        <div class="comment__form-footer">
+                            <ErrorMessage ref="error" class="form__error error-active" name="message"/>
+                            <button class="button button--main">Submit</button>
+                        </div>
+                    </Form>
                 </div>
-                <div class="song-page__desc">
-                    <h1>{{song.modified_name}}</h1>
-                    <p>{{song.genre}}</p>
+                <div v-else class="comment__login">
+                    <button type="button" class="button button--main" @click.prevent="toggleModal">Login</button>
                 </div>
-            </template>
-        </ContentHeader>
-        <div class="content-body comment">
-            <Loader v-if="loading"/>
-            <ul v-if="comments.length > 0" class="comment__list">
-                <Notification
-                    class="notification notification--comment"
-                    v-if="showAlert"
-                    :class="messageBg">
-                    <template #notification>
-                        {{showMessage}}
-                    </template>
-                </Notification>
-                <li class="comment__item" v-for="comment in comments" :key="comment.docID">
-                    <div class="user-avatar user-avatar--hide-name comment__avatar">
-                        <div class="user-avatar__avatar">{{comment.user.charAt(0)}}</div>
-                    </div>
-                    <div class="comment__wrap">
-                        <strong class="comment__name">{{comment.user}}</strong>
-                        <time datetime="" class="comment__time">
-                            <b>{{comment.date}}</b>
-                        </time>
-                    </div>
-                    <p class="comment__message">{{comment.content.message}}</p>
-                </li>
-            </ul>
-            <!--            <p class="comment__count">comments: {{song.comment_count}}</p>-->
-            <div class="comment__form" v-if="this.isLogged">
-                <UserAvatar class="user-avatar--hide-name comment__avatar comment__avatar--form"/>
-                <Form @submit="submitMessage" :validation-schema="messageSchema" class="form">
-                    <Field as="textarea" name="message" id="text" class="form__input"
-                           placeholder="Reply" rows="5" v-model="textField"/>
-                    <div class="comment__form-footer">
-                        <ErrorMessage ref="error" class="form__error error-active" name="message"/>
-                        <button class="button button--main">Submit</button>
-                    </div>
-                </Form>
-            </div>
-            <div v-else class="comment__login">
-                <button type="button" class="button button--main" @click.prevent="toggleModal">Login</button>
             </div>
         </div>
     </div>
