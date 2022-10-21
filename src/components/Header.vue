@@ -1,63 +1,44 @@
 <template>
-    <header class="header header--user content-header">
-        <div class="header__wrap">
-            <button type="button"
-                    class="button header__button"
-                    @click.prevent="backToPrevious"/>
-            <ul v-if="!this.isLogged" class="nav">
-                <li class="nav__item">
-                    <a href="#" class="nav__link" @click.prevent="toggleModal" title="Login/Register">
-                        <svg width="25" height="25" class="nav__icon">
-                            <use xlink:href="/src/img/sprite.svg#login"/>
-                        </svg>
-                        <span class="nav__title">
-                            Login/Register
-                        </span>
-                    </a>
-                </li>
-                <li class="nav__item">
-                    <router-link class="nav__link" :to="{name: 'main'}">
-                        <svg width="25" height="25" class="nav__icon">
-                            <use xlink:href="/src/img/sprite.svg#home"/>
-                        </svg>
-                        <span class="nav__title">Home</span>
-                    </router-link>
-                </li>
-            </ul>
-            <div v-else class="clickable header__user-menu user-menu" :class="hiddenClass" @click.prevent="toggleMenu">
-                <UserAvatar class="user-avatar--header"/>
-                <button type="button" class="clickable__button"/>
-                <div v-if="isActive" class="user-menu__dropdown">
-                    <nav class="user-menu__nav nav">
-                        <ul class="nav__list">
-                            <li class="nav__item">
-                                <a href="#" class="nav__link" @click.prevent="logOut" title="Logout">
-                                    <svg width="25" height="25" class="nav__icon">
-                                        <use xlink:href="/src/img/sprite.svg#login"/>
-                                    </svg>
-                                    <span class="nav__title">Logout</span>
-                                </a>
-                            </li>
-                            <li class="nav__item">
-                                <router-link class="nav__link" :to="{name: 'main'}">
-                                    <svg width="25" height="25" class="nav__icon">
-                                        <use xlink:href="/src/img/sprite.svg#home"/>
-                                    </svg>
-                                    <span class="nav__title">Home</span>
-                                </router-link>
-                            </li>
-                            <li class="nav__item">
-                                <router-link class="nav__link" :to="{name: 'manage'}">
-                                    <svg width="25" height="25" class="nav__icon">
-                                        <use xlink:href="/src/img/sprite.svg#manage"/>
-                                    </svg>
-                                    <span class="nav__title">Manage</span>
-                                </router-link>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+    <header class="header header--user">
+        <div class="header__nav">
+            <!--            <button type="button"-->
+            <!--                    class="button header__button"-->
+            <!--                    @click.prevent="backToPrevious"/>-->
+            <div class="logo logo--main">
+                <router-link class="logo__link" :to="{name: 'main'}"/>
             </div>
+            <nav class="user-menu__nav nav" v-if="!this.isLogged">
+                <ul class="nav">
+                    <li class="nav__item">
+                        <router-link class="nav__link" :to="{name: 'auth'}" title="Auth">LogIn</router-link>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="user-menu__nav nav" v-else>
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <router-link class="logo__link" :to="{name: 'main'}" @click.prevent="logOut" title="LogOut">
+                            Logout
+                        </router-link>
+                    </li>
+                    <li class="nav__item">
+                        <router-link class="nav__link" :to="{name: 'manage'}" title="Manage">
+                            Manage
+                        </router-link>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header__profile">
+            <nav>
+                <ul class="nav__list">
+                    <li v-if="isLogged" class="nav__item">
+                        <router-link class="nav__link" :to="{name: 'manage'}" title="Manage">
+                            <UserAvatar class="user-avatar user-avatar--header"/>
+                        </router-link>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </header>
 </template>

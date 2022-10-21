@@ -36,7 +36,7 @@
         name: "Player",
         data() {
             return {
-                show: true
+                show: false
             }
         },
         methods: {

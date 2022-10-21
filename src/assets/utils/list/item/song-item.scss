@@ -2,12 +2,22 @@
     padding: 15px;
     display: flex;
     justify-content: space-between;
+
     &:hover {
-        background-color: var(--content-color);
+        .song-item__link, .song-item__count {
+            transition: color 0.3s;
+            color: var(--second-hover-color);
+        }
+
         cursor: pointer;
     }
+
     &__genre {
         font-size: 12px;
         color: var(--gray-color);
+    }
+
+    &__link, &__count {
+        color: var(--vt-c-white);
     }
 }
