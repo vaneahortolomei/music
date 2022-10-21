@@ -41,16 +41,16 @@ export default {
         configure({
             generateMessage: (ctx) => {
                 const messages = {
-                    required: `${ctx.field} is required!`,
+                    required: `enter ${ctx.field}`,
                     min: `Too few characters`,
                     max: `Too many characters`,
-                    email: `The ${ctx.field} field must be valid!`,
+                    email: `Looks like this ${ctx.field} is incomplete`,
                     excluded: `Country banned`,
                 };
 
                 return messages[ctx.rule.name] ?
                     messages[ctx.rule.name] :
-                    `The field ${ctx.field} is invalid!`;
+                    `${ctx.field} field is invalid!`;
             }
         });
     }

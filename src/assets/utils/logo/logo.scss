@@ -1,0 +1,8 @@
+.logo {
+    display: block;
+    &__img {
+        path {
+            fill: var(--main-color);
+        }
+    }
+}

@@ -1,12 +1,14 @@
 .form {
     &__group {
         &:not(:last-child) {
-            margin-bottom: 15px;
+            margin-bottom: 30px;
         }
     }
 
     &__label {
+        display: inline-block;
         font-size: 14px;
+        margin-bottom: 10px;
     }
 
     &__input {
@@ -25,13 +27,16 @@
         appearance: none;
         overflow: visible;
         line-height: inherit;
+
         &--country {
-            border: 1px solid #b8adad!important;
+            border: 1px solid #b8adad !important;
         }
     }
 
     &__error {
+        display: inline-block;
         color: red;
         font-size: 12px;
+        margin-top: 10px;
     }
 }

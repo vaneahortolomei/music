@@ -15,6 +15,9 @@ const routes = [
         path: "/auth",
         name: "auth",
         component: Auth,
+        beforeEnter: (to, from, next) => {
+            next();
+        },
     },
     {
         path: "/manage",
