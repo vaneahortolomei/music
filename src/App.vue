@@ -1,14 +1,14 @@
 <template>
     <div class="wrapper">
         <div class="content">
-            <Header v-if="isActive"/>
+            <Header v-if="this.$route.name !== 'auth'"/>
             <router-view v-slot="{Component}">
                 <transition name="fade">
                     <component :is="Component">
                     </component>
                 </transition>
             </router-view>
-            <Player v-if="isActive"/>
+            <Player v-if="this.$route.name !== 'auth'"/>
         </div>
     </div>
 </template>
@@ -18,19 +18,12 @@
     import userModalStore from "./stores/user";
     import Player from "./components/Player.vue";
     import Header from "./components/Header.vue";
-    import Auth from "./components/Auth.vue";
 
     export default {
-        components: {Header, Player, Auth},
-        data() {
-            return {
-                isActive: false,
-            }
-        },
+        components: {Header, Player},
         created() {
             if (auth.currentUser) {
                 this.isLogged = true;
-                this.isActive = true;
             }
         },
         computed: {
