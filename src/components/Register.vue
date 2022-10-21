@@ -8,58 +8,37 @@
             </template>
         </Notification>
     </transition>
-    <fieldset id="modal-register">
+    <fieldset>
         <Form @submit="submitRegister"
               class="form"
-              :validation-schema="registerSchema"
-              :initial-values="userData">
+              :validation-schema="registerSchema">
             <div class="form__group">
-                <label>Name</label>
+                <label class="form__label">Name</label>
                 <Field name="firstName" class="form__input" type="text"/>
                 <ErrorMessage class="form__error" name="firstName"/>
             </div>
             <div class="form__group">
-                <label>LastName</label>
+                <label class="form__label">LastName</label>
                 <Field class="form__input" type="text" name="lastName"/>
                 <ErrorMessage class="form__error" name="lastName"/>
             </div>
             <div class="form__group">
-                <label>Age</label>
-                <Field class="form__input" type="number" name="age"/>
-                <ErrorMessage class="form__error" name="age"/>
-            </div>
-            <div class="form__group">
-                <label>Password</label>
+                <label class="form__label">Password</label>
                 <Field name="password" class="form__input" type="password"/>
                 <ErrorMessage class="form__error" name="password"/>
             </div>
             <div class="form__group">
-                <label>Confirm Password</label>
+                <label class="form__label">Confirm Password</label>
                 <Field name="confirm_password" class="form__input" type="password"/>
                 <ErrorMessage class="form__error" name="confirm_password"/>
             </div>
             <div class="form__group">
-                <label>Country</label>
-                <Field as="select" name="country" class="form__input form__input--country">
-                    <option value="USA">USA</option>
-                    <option value="Germany">Germany</option>
-                    <option value="France">France</option>
-                    <option value="Russia">Russia</option>
-                </Field>
-                <ErrorMessage class="form__error" name="country"/>
-            </div>
-            <div class="form__group">
-                <label>Email</label>
+                <label class="form__label">Email</label>
                 <Field class="form__input" type="email" name="email"/>
                 <ErrorMessage class="form__error" name="email"/>
             </div>
-            <div class="form__group">
-                <Field type="checkbox" name="tos" value="1"/>
-                <label> Accept terms</label>
-                <ErrorMessage class="form__error form__checkbox-error" name="tos"/>
-            </div>
             <button class="button button--main button--responsive" type="submit" :disabled="submission">
-                Register
+                Join
             </button>
         </Form>
     </fieldset>
@@ -79,15 +58,9 @@
                 registerSchema: {
                     firstName: 'required|min:2|max:100|alpha_spaces',
                     lastName: 'required|min:3|max:100|alpha_spaces',
-                    age: 'required|min_value:18|max_value:100',
                     email: 'required|min:3|max:100|email',
                     password: 'required|min:6|max:100',
                     confirm_password: 'confirmed:@password',
-                    country: 'required|excluded:Russia',
-                    tos: 'required'
-                },
-                userData: {
-                    country: 'USA'
                 },
                 submission: false,
                 showAlert: false,
@@ -121,6 +94,7 @@
                     e.code === 'auth/email-already-in-use' ?
                         this.showMessage = 'This email is already in use' :
                         this.showMessage = 'Something wrong! Try again please!';
+
                     this.setAlertTimer(3000);
 
                     return;

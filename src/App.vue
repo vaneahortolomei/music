@@ -10,7 +10,6 @@
             </router-view>
             <Player v-if="isActive"/>
         </div>
-        <Auth/>
     </div>
 </template>
 <script>

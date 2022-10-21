@@ -1,0 +1,15 @@
+.auth-form {
+    @media(min-width: 575px){
+        width: min(100%, 400px);
+        margin-inline: auto;
+    }
+    &__title {
+        text-align: center;
+        font-weight: 500;
+        span {
+            display: inline-block;
+            color: var(--second-color);
+            font-weight: 500;
+        }
+    }
+}

@@ -1,14 +1,14 @@
 <template>
-    <fieldset id="modal-login">
-        <transition name="fade">
-            <Notification class="notification"
-                          :class="messageBg"
-                          v-if="showAlert">
-                <template #notification>
-                    {{showMessage}}
-                </template>
-            </Notification>
-        </transition>
+    <transition name="fade">
+        <Notification class="notification"
+                      :class="messageBg"
+                      v-if="showAlert">
+            <template #notification>
+                {{showMessage}}
+            </template>
+        </Notification>
+    </transition>
+    <fieldset>
         <Form @submit="submitLogin"
               class="form"
               :validation-schema="loginSchema">
@@ -22,7 +22,7 @@
                 <Field name="password" class="form__input" type="password"/>
                 <ErrorMessage class="form__error" name="password"/>
             </div>
-            <button class="button button--main button--responsive" type="submit" :disabled="submission">Login</button>
+            <button class="button button--main button--responsive" type="submit" :disabled="submission">Continue</button>
         </Form>
     </fieldset>
 </template>

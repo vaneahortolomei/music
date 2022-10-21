@@ -4,7 +4,10 @@
     --header-background: #fff;
     --header-size: 70px;
     --header-active-size: 200px;
-    --main-color: #fc942c;
+    --main-color: #464064;
+    --main-hover-color: #464064cf;
+    --second-color: #EEC38E;
+    --second-hover-color: #eec38ea8;
     --font-weight: 300;
     --content-color: #f4fafe;
     --red-color: #e61715;
@@ -25,7 +28,7 @@
 }
 
 body {
-    color: var(--vt-c-black);
+    color: var(--main-color);
     background: var(--vt-c-white);
     transition: color 0.5s, background-color 0.5s;
     line-height: 1.6;
