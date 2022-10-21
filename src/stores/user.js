@@ -4,6 +4,7 @@ import {auth, usersCollection} from "../includes/firebase.js";
 export default defineStore('user', {
     state: () => ({
         isLogged: false,
+        isAuthPage: false,
         isDesktop: window.matchMedia("(min-width: 1025px)").matches,
     }),
     actions: {
