@@ -1,4 +1,14 @@
 .player-control.player-control--header {
     height: 80px;
     min-width: 80px;
+    .player-control__icon {
+        width: 20px;
+        height: 20px;
+        &--play {
+            background-size: 20px 20px;
+        }
+        &--paused {
+            background-size: 20px 20px;
+        }
+    }
 }

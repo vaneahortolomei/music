@@ -1,5 +1,5 @@
 .song-item.song-item--manage {
-    background-color: var(--vt-c-white);
+    background-color: var(--second-color);
     box-shadow: 0 15px 30px rgb(31 51 136 / 15%);
     border-radius: 15px;
     display: block;
@@ -21,23 +21,51 @@
     }
     .song-item__form-edit {
         border: none;
-        max-width: 800px;
         margin: 20px auto;
+        width: 100%;
+        @media(min-width: 768px){
+            flex: 0 1 60%;
+            margin: 0;
+        }
     }
 
     .song-item__button--remove {
-        background: url("/src/img/remove.svg") no-repeat center;
+        background: url("/src/img/remove-white.svg") no-repeat center;
+        background-size: 20px 20px;
     }
 
     .song-item__button--edit {
-        background: url("/src/img/edit.svg") no-repeat center;
+        background: url("/src/img/edit-white.svg") no-repeat center;
+        background-size: 20px 20px;
     }
 
     .song-item__btn-group {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        max-width: 300px;
         margin: 0 auto;
+        .button {
+            + .button {
+                margin-left: 15px;
+            }
+        }
+    }
+    .song-item__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    .song-item__img {
+        display: none;
+        @media(min-width: 768px){
+            display: block;
+            flex: 0 0 40%;
+            img {
+                padding-right: 50px;
+            }
+        }
+    }
+    .form__input {
+        border: none;
     }
 }

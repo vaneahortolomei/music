@@ -18,7 +18,7 @@
                     </div>
                 </template>
             </ContentHeader>
-            <div class="content-body comment">
+            <div class="comment">
                 <Loader v-if="loading"/>
                 <ul v-if="comments.length > 0" class="comment__list">
                     <Notification

@@ -1,5 +1,5 @@
 <template>
-    <div class="content-body manage">
+    <div class="manage">
         <div class="container">
             <Notification v-if="notification"
                           class="notification notification--format">
@@ -7,17 +7,12 @@
                     <p>Only audio files</p>
                 </template>
             </Notification>
-            <ContentHeader class="manage__header">
-                <template #content-header>
-                    <h1 class="manage__title">Drag & Drop files here to upload</h1>
-                </template>
-            </ContentHeader>
             <UploadApp ref="upload"
                        :addSong="addSong"
                        @showNotification="showNotification"/>
             <div class="manage__main">
                 <Loader v-if="loading"/>
-                <ul class="songs-list">
+                <ul class="songs-list songs-list--manage">
                     <Item v-for="(song, i) in songs"
                           :key="song.docID"
                           :song="song"

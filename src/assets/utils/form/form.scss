@@ -27,6 +27,9 @@
         appearance: none;
         overflow: visible;
         line-height: inherit;
+        @media(max-width: 1400px) {
+            outline: none;
+        }
 
         &--country {
             border: 1px solid #b8adad !important;

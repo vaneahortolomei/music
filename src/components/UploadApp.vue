@@ -1,5 +1,9 @@
 <template>
     <div class="manage__upload">
+        <picture class="upload-box__img">
+            <source srcset="/src/img/manage/nouras.webp" type="image/webp">
+            <img decoding="sync" src="/src/img/manage/nouras.png" alt="404">
+        </picture>
         <div class="upload-box upload-box--manage"
              @drag.prevent.stop=""
              @dragstart.prevent.stop=""
@@ -9,13 +13,14 @@
              @dragleave.prevent.stop="is_dragover = false"
              @drop.prevent.stop="uploadFiles($event)"
              :class="{'upload-box--active': is_dragover}">
-            <p class="upload-box__title">BrowseFiles</p>
+            <p class="upload-box__title">Drag & Drop
+                files here to upload</p>
         </div>
         <div class="upload-file">
             <div class="upload-file__custom">
                 <input ref="file" id="files" type="file" class="upload-file__input" @change="uploadFiles($event)"
                        multiple/>
-                <button class="button button--main button--responsive">BrowseFiles</button>
+                <button class="button button--responsive button--second">BrowseFiles</button>
                 <span class="upload-file__file-name" ref="fileName"/>
             </div>
         </div>
@@ -60,7 +65,7 @@
                         file.type !== 'audio/mpeg' &&
                         file.type !== 'audio/mp3' &&
                         file.type !== 'audio/flac' &&
-                        file.type !== 'audio/wav'){
+                        file.type !== 'audio/wav') {
                         console.log(auth.currentUser.email)
                         this.$emit('showNotification', Boolean);
                         return null;
@@ -74,14 +79,14 @@
                         task,
                         current_progress: 0,
                         name: file.name,
-                        variant: '#ff8227',
+                        variant: '#EEC38E',
                         text: 'Loading...',
                     }) - 1;
 
                     task.on('state_changed', (snapshot) => {
                         this.uploads[uploadIndex].current_progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     }, () => {
-                        this.uploads[uploadIndex].variant = '#ff514c';
+                        this.uploads[uploadIndex].variant = '#C5634E';
                         this.uploads[uploadIndex].text = 'Error';
                     }, async () => {
                         const song = {
@@ -99,7 +104,7 @@
 
                         this.addSong(songGet);
 
-                        this.uploads[uploadIndex].variant = 'rgba(46, 255, 172, 0.7)';
+                        this.uploads[uploadIndex].variant = '#60B682';
                         this.uploads[uploadIndex].text = 'Complete';
                     });
                 });

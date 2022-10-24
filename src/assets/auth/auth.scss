@@ -32,11 +32,13 @@
         position: relative;
         padding: 25px;
         background: var(--vt-c-white);
+        min-height: 100vh;
         @media(min-width: 575px) {
             padding: 50px;
         }
         @media(min-width: 1024px) {
             padding: 100px;
+            min-height: initial;
         }
 
         fieldset {

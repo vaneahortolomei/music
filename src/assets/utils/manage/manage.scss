@@ -18,11 +18,8 @@
     }
 
     &__upload {
-        padding: 20px;
         border-radius: 10px;
-        background: var(--vt-c-white);
-        margin: -130px auto;
-        max-width: 250px;
+        margin: 50px auto;
         box-shadow: 0 15px 30px rgb(31 51 136 / 15%);
         @media(min-width: 475px) {
             max-width: 400px;
@@ -37,6 +34,6 @@
     }
 
     &__main {
-        margin-top: 200px;
+        margin-top: 50px;
     }
 }
