@@ -11,7 +11,7 @@
                         </router-link>
                     </div>
                 </header>
-                <h1 class="auth-description__title">My own music dolor sit amet, consectetuer adipiscing elit</h1>
+                <h1 class="auth-description__title">Welcome to MyOwnMusic</h1>
                 <p class="auth-description__subtitle">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
                     nonummy </p>
             </div>

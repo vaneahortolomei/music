@@ -40,6 +40,6 @@
             return {
                 tab: 'login'
             }
-        }
+        },
     }
 </script>

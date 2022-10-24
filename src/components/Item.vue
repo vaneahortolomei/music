@@ -19,35 +19,41 @@
                         @click="deleteSong"/>
             </div>
         </div>
-        <fieldset class="song-item__form-edit" v-show="song.showForm">
-            <Notification class="notification"
-                          v-if="showAlert"
-                          :class="messageBg">
-                <template #notification>
-                    {{showMessage}}
-                </template>
-            </Notification>
-            <Form @submit="onSubmit" :validation-schema="songSchema" class="form">
-                <div class="form__group">
-                    <label class="form__label">Title</label>
-                    <Field name="modified_name" class="form__input" type="text"
-                           placeholder="Enter song name" @input="unsavedFlag(true)"/>
-                    <ErrorMessage class="form__error error-active" name="modified_name"/>
-                </div>
-                <div class="form__group">
-                    <label class="form__label">Genre</label>
-                    <Field name="genre" class="form__input" type="text" placeholder="Enter genre"
-                           @input="unsavedFlag(true)"/>
-                    <ErrorMessage class="form__error error-active" name="genre"/>
-                </div>
-                <div class="form__group song-item__btn-group">
-                    <button class="button button--main song-item__button-submit" type="submit">Submit</button>
-                    <button class="button button--main song-item__button-return" type="button"
-                            @click="song.showForm = false">Go back
-                    </button>
-                </div>
-            </Form>
-        </fieldset>
+        <div class="song-item__container" v-show="song.showForm">
+            <picture class="song-item__img">
+                <source srcset="/src/img/manage/Illustration.webp" type="image/webp">
+                <img decoding="sync" src="/src/img/manage/Illustration.png" alt="404">
+            </picture>
+            <fieldset class="song-item__form-edit">
+                <Notification class="notification"
+                              v-if="showAlert"
+                              :class="messageBg">
+                    <template #notification>
+                        {{showMessage}}
+                    </template>
+                </Notification>
+                <Form @submit="onSubmit" :validation-schema="songSchema" class="form">
+                    <div class="form__group">
+                        <label class="form__label">Title</label>
+                        <Field name="modified_name" class="form__input" type="text"
+                               placeholder="Enter song name" @input="unsavedFlag(true)"/>
+                        <ErrorMessage class="form__error error-active" name="modified_name"/>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Genre</label>
+                        <Field name="genre" class="form__input" type="text" placeholder="Enter genre"
+                               @input="unsavedFlag(true)"/>
+                        <ErrorMessage class="form__error error-active" name="genre"/>
+                    </div>
+                    <div class="form__group song-item__btn-group">
+                        <button class="button button--main button--responsive song-item__button-submit" type="submit">Submit</button>
+                        <button class="button button--main button--responsive song-item__button-return" type="button"
+                                @click="song.showForm = false">Go back
+                        </button>
+                    </div>
+                </Form>
+            </fieldset>
+        </div>
     </li>
 </template>
 

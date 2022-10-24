@@ -2,16 +2,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--content-color);
     min-height: 200px;
     border-radius: 15px;
     border: 1px dashed var(--gray-color);
     transition: background-color 0.2s ease;
     &--active {
-        background-color: #d8dee1;
+        background-color: var(--vt-c-white);
     }
     &__title {
-        font-size: 12px;
+        font-size: 16px;
         color: var(--gray-color);
+    }
+    &__img {
+        display: inline-block;
+        @media(min-width: 768px){
+            margin-bottom: 30px;
+        }
     }
 }

@@ -1,17 +1,12 @@
 .upload-file {
-    background-color: var(--content-color);
     width: 100%;
-    padding: 10px;
     border-radius: 10px;
-    @media(min-width: 1024px){
-        padding: 20px;
-        margin-top: 10px;
-    }
 
     &__custom {
         position: relative;
         cursor: pointer;
         flex: 0 auto;
+        margin-top: 30px;
 
         .upload-file__input {
             opacity: 0;
