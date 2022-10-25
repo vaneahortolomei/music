@@ -23,6 +23,7 @@
         border: none;
         margin: 20px auto;
         width: 100%;
+        padding: 0;
         @media(min-width: 768px){
             flex: 0 1 60%;
             margin: 0;
@@ -43,7 +44,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin: 0 auto;
+        margin: 40px 0 auto;
         .button {
             + .button {
                 margin-left: 15px;
@@ -67,5 +68,10 @@
     }
     .form__input {
         border: none;
+    }
+    .form__group {
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
     }
 }

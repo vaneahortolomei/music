@@ -2,7 +2,7 @@
     <main class="main-page">
         <div class="container">
             <div class="main-page__body">
-                <!--            <Loader v-if="loading"/>-->
+                <Loader v-if="loading"/>
                 <ul class="songs-list">
                     <Item v-for="song in songs"
                           :key="song.docID"

@@ -1,0 +1,36 @@
+.button.button--previous {
+    background: none;
+    border: none;
+    border-radius: 50%;
+    min-width: 35px;
+    min-height: 35px;
+    color: var(--vt-c-white);
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(50%, -50%) rotate(-90deg);
+        background: url('/src/img/arrow-white.svg') no-repeat right;
+        background-size: contain;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        transition: all 0.3s;
+    }
+
+    &--main {
+        margin-top: 20px;
+        padding-left: 40px;
+    }
+
+    @media(min-width: 1400px) {
+        &:hover {
+            &:after {
+                left: -10%;
+            }
+        }
+    }
+}

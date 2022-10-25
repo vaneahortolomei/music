@@ -15,11 +15,23 @@
             height: 100vh;
             position: sticky;
             top: 0;
-            background: var(--main-color) url("/src/img/login/login-people.png") no-repeat center 90%;
+            background-image: -webkit-image-set(
+                    url("/src/img/login/login-people.png") 2x,
+                    url("/src/img/login/login-people.png") 1x
+            );
+            background-image: image-set(
+                    url("/src/img/login/login-people.webp") type("image/webp") 1x,
+                    url("/src/img/login/login-people.webp") type("image/webp") 2x,
+                    url("/src/img/login/login-people.png") type("image/png") 1x,
+                    url("/src/img/login/login-people.png") 2x
+            );
+            background-color: var(--main-color) url("/src/img/login/login-people.png");
+            background-repeat: no-repeat;
+            background-position: center 90%;
             background-size: 360px 260px;
             padding: 100px 85px;
         }
-        @media(min-width: 1500px){
+        @media(min-width: 1500px) {
             background-size: 500px 360px;
         }
         @media(min-width: 2000px) {
@@ -52,6 +64,7 @@
             font-size: 16px;
         }
     }
+
     &__main-img {
         position: absolute;
         bottom: 100px;
@@ -59,14 +72,14 @@
         width: 150px;
         height: auto;
         display: none;
-        @media(min-width: 991px){
+        @media(min-width: 991px) {
             display: block;
         }
-        @media(min-width: 1500px){
+        @media(min-width: 1500px) {
             left: -150px;
             width: 200px;
         }
-        @media(min-width: 2000px){
+        @media(min-width: 2000px) {
             left: -220px;
             width: 300px;
         }

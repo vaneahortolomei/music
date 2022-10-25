@@ -1,6 +1,7 @@
 <template>
     <div class="song-page">
         <div class="container">
+            <button type="button" class="button button--previous button--previous--main" @click="backToPrevious">Previous</button>
             <ContentHeader class="song-page__header">
                 <template #content-header>
                     <div class="song-page__control">
@@ -18,7 +19,7 @@
                     </div>
                 </template>
             </ContentHeader>
-            <div class="comment">
+            <div class="comment song-page__comments">
                 <Loader v-if="loading"/>
                 <ul v-if="comments.length > 0" class="comment__list">
                     <Notification
@@ -50,12 +51,12 @@
                                placeholder="Reply" rows="5" v-model="textField"/>
                         <div class="comment__form-footer">
                             <ErrorMessage ref="error" class="form__error error-active" name="message"/>
-                            <button class="button button--main">Submit</button>
+                            <button class="button button--second">Submit</button>
                         </div>
                     </Form>
                 </div>
                 <div v-else class="comment__login">
-                    <button type="button" class="button button--main" @click.prevent="toggleModal">Login</button>
+                    <router-link class="button button--second comment__link" :to="{name: 'auth'}">Login</router-link>
                 </div>
             </div>
         </div>
@@ -183,6 +184,9 @@
                 const month = parts.month < 10 ? `0${parts.month}` : parts.month;
 
                 return `${date}.${month}.${parts.year}`
+            },
+            backToPrevious() {
+                return this.$router.go(-1);
             },
         }
     }

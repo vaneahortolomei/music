@@ -1,6 +1,7 @@
 .content-header {
-    //background-color: var(--content-color);
+    background-color: var(--main-color-dark);
     padding: 20px;
+    border-radius: 10px;
 
     &__head {
         display: flex;
