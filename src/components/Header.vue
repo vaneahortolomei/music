@@ -11,7 +11,7 @@
                     </li>
                 </ul>
             </nav>
-            <nav class="user-menu__nav nav" v-else>
+            <nav class="user-menu__nav user-menu__nav--hide nav" v-else>
                 <ul class="nav__list">
                     <li class="nav__item">
                         <router-link class="nav__link" :to="{name: 'manage'}" title="Manage">
@@ -21,7 +21,7 @@
                 </ul>
             </nav>
         </div>
-        <div class="header__profile">
+        <div class="header__profile" v-if="this.isLogged">
             <div class="user-menu clickable">
                 <UserAvatar class="user-avatar user-avatar--header"/>
                 <div class="user-menu__arrow" :class="{'user-menu__arrow--active': isActive}"/>
@@ -46,6 +46,15 @@
             </div>
         </div>
     </header>
+    <transition name="fade">
+        <Notification class="notification"
+                      :class="messageBg"
+                      v-if="showAlert">
+            <template #notification>
+                {{showMessage}}
+            </template>
+        </Notification>
+    </transition>
 </template>
 
 <script>
@@ -54,10 +63,18 @@
     import useMenuStore from '../stores/user-menu.js';
     import useUserStore from "../stores/user";
     import useModalStore from '../stores/modal';
+    import Notification from "./Notification.vue";
 
     export default {
         name: "Header",
-        components: {UserAvatar},
+        components: {Notification, UserAvatar},
+        data() {
+            return {
+                showAlert: false,
+                messageBg: 'notification--process',
+                showMessage: 'User is log out',
+            }
+        },
         computed: {
             ...mapState(useMenuStore, ['hiddenClass']),
             ...mapWritableState(useMenuStore, ['isActive']),
@@ -71,12 +88,19 @@
             async logOut() {
                 await this.signOut();
                 this.$router.push({name: 'main'});
+                this.showAlert = true;
+                this.setAlertTimer(2000);
             },
             toggleModal() {
                 this.isOpen = !this.isOpen;
             },
             toggleMenu() {
                 this.isActive = !this.isActive;
+            },
+            setAlertTimer(time) {
+                setTimeout(() => {
+                    this.showAlert = false;
+                }, time);
             }
         }
     }
