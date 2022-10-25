@@ -1,12 +1,10 @@
 .comment {
-    margin-bottom: var(--player-mobile-height);
-    @media(min-width: 1024px) {
-        margin-bottom: var(--player-desktop-height);
-    }
-
     &__list {
         padding: 0;
         list-style-type: none;
+    }
+    &__name, &__message, &__time {
+        color: var(--vt-c-white)
     }
 
     &__message {
@@ -23,7 +21,7 @@
             top: 20px;
             left: 25px;
             height: 100%;
-            border-left: 1px solid var(--gray-color);
+            border-left: 1px solid var(--second-color);
         }
 
         &:not(:last-child) {
@@ -41,6 +39,9 @@
 
         &--form {
             left: 20px;
+        }
+        .user-avatar__avatar {
+            background: var(--second-color);
         }
     }
 
@@ -71,18 +72,24 @@
     &__form {
         position: relative;
         margin-top: 20px;
-        background-color: var(--content-color);
+        background-color: var(--main-color-dark);
         padding: 20px 20px 20px 80px;
         margin-right: -20px;
         margin-left: -20px;
+        @media(min-width: 1024px){
+            border-radius: 10px;
+        }
 
         .form textarea {
             border: 1px solid transparent;
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            min-height: 200px;
+            min-height: 100px;
             resize: none;
+            @media(min-width: 1024px){
+                min-height: 200px;
+            }
         }
 
         @media(min-width: 1024px) {
@@ -91,7 +98,7 @@
         }
 
         .user-avatar__avatar {
-            background: #e2ebf1;
+            background: var(--second-color);
         }
     }
 
@@ -110,10 +117,13 @@
 
     &__login {
         text-align: center;
-        background: var(--content-color);
+        background: var(--main-color-dark);
         padding: 20px;
         max-width: 500px;
         margin: 20px auto;
         border-radius: 15px;
+    }
+    &__link {
+        padding: 10px;
     }
 }

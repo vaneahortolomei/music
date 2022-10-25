@@ -1,0 +1,8 @@
+.header.header--user {
+    .user-menu__nav {
+        display: none;
+        @media(min-width: 768px){
+            display: flex;
+        }
+    }
+}

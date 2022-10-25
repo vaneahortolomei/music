@@ -5,6 +5,7 @@
     --header-size: 70px;
     --header-active-size: 200px;
     --main-color: #464064;
+    --main-color-dark: #363053;
     --main-hover-color: #464064cf;
     --second-color: #EEC38E;
     --second-hover-color: #eec38ea8;
@@ -23,7 +24,6 @@
 *::after {
     box-sizing: border-box;
     margin: 0;
-    position: relative;
     font-weight: normal;
 }
 
@@ -44,6 +44,7 @@ body {
 a {
     color: var(--vt-c-black);
     text-decoration: none;
+    display: inline-block;
 }
 
 h1, h2, h3, h4, h5, h6, span, p, div {

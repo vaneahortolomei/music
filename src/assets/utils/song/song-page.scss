@@ -1,12 +1,13 @@
 .song-page {
+    margin-bottom: var(--player-mobile-height);
+    @media(min-width: 1024px) {
+        margin-bottom: var(--player-desktop-height);
+    }
     &__header {
         display: flex;
-        gap: 20px;
+        margin-top: 30px;
         h1 {
             font-size: 20px;
-            @media(min-width: 1024px){
-                font-size: 25px;
-            }
         }
         p {
             font-size: 14px;
@@ -14,6 +15,12 @@
         }
     }
     &__control {
-        margin-right: 10px;
+        margin-right: 15px;
+    }
+    &__desc {
+        color: var(--vt-c-white)
+    }
+    &__comments {
+        margin-top: 50px;
     }
 }
