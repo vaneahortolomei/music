@@ -55,6 +55,7 @@
             }),
             async submitLogin(val) {
                 this.showAlert = true;
+                document.body.classList.add('body--fixed');
                 this.showMessage = 'Process!';
                 this.messageBg = 'notification--process';
                 try {

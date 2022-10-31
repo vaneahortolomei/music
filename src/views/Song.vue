@@ -1,7 +1,7 @@
 <template>
     <div class="song-page">
         <div class="container">
-            <button type="button" class="button button--previous button--previous--main" @click="backToPrevious">Previous</button>
+            <button type="button" class="button button--previous button--previous--main" @click="backToPrevious">Back</button>
             <ContentHeader class="song-page__header">
                 <template #content-header>
                     <div class="song-page__control">
