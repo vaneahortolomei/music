@@ -99,6 +99,7 @@
         methods: {
             async onSubmit(val) {
                 this.showAlert = true;
+                document.body.classList.add('body--fixed');
                 this.showMessage = 'Process!';
                 this.messageBg = 'notification--process';
 
@@ -137,6 +138,7 @@
             hideStatus() {
                 setTimeout(() => {
                     this.showAlert = false;
+                    document.body.classList.remove('body--fixed');
                     this.song.showForm = false;
                 }, 2000);
             }
