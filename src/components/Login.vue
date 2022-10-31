@@ -91,6 +91,7 @@
             setAlertTimer(time) {
                 setTimeout(() => {
                     this.showAlert = false;
+                    document.body.classList.remove('body--fixed');
                 }, time);
             }
         }
