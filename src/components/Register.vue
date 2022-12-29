@@ -90,8 +90,6 @@
                     }
                 } catch (e) {
 
-                    console.log(e);
-
                     this.showAlert = true;
                     this.messageBg = 'notification--error';
 
