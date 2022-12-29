@@ -67,7 +67,7 @@
     import useUserStore from "../stores/user";
     import usePlayerStore from "../stores/player"
     import {mapActions, mapWritableState, mapState} from "pinia";
-    import {auth, songsCollection, commentsCollection, usersCollection} from "../includes/firebase.js";
+    import {auth, songsCollection, commentsCollection} from "../includes/firebase.js";
     import ContentHeader from "../components/ContentHeader.vue";
     import Notification from "../components/Notification.vue";
     import UserAvatar from "../components/UserAvatar.vue";

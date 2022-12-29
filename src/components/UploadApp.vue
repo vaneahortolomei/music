@@ -66,7 +66,6 @@
                         file.type !== 'audio/mp3' &&
                         file.type !== 'audio/flac' &&
                         file.type !== 'audio/wav') {
-                        console.log(auth.currentUser.email)
                         this.$emit('showNotification', Boolean);
                         return null;
                     }

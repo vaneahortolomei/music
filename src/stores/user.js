@@ -17,8 +17,6 @@ export default defineStore('user', {
             await usersCollection.doc(userCred.user.uid).set({
                 firstName: payload.firstName,
                 email: payload.email,
-                age: payload.age,
-                country: payload.country,
             });
 
             await userCred.user.updateProfile({
